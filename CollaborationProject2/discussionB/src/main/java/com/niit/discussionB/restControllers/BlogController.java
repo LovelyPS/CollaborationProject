@@ -21,7 +21,7 @@ import com.niit.discussionB.model.Blog;
 @RestController
 public class BlogController {
 	
-	private static final Logger log=LoggerFactory.getLogger(BlogController.class);
+	/*private static final Logger log=LoggerFactory.getLogger(BlogController.class);
 	
 	@Autowired
 	private BlogDao blogDao;
@@ -81,5 +81,5 @@ public class BlogController {
 		log.debug("-->USER DELETED SUCCESSFULLY");
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
 	}
-
+*/
 }

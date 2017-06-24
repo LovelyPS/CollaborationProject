@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.discussionB.dao.BlogDao;
 import com.niit.discussionB.model.Blog;
-
+/*
 @EnableTransactionManagement
-@Repository("blogDao")
-public class BlogDaoImpl implements BlogDao {
+@Repository("blogDao")*/
+public class BlogDaoImpl /*implements BlogDao*/ {
 
-	@Autowired
+	/*@Autowired
 	private SessionFactory sessionFactory;
 	
 	public BlogDaoImpl(SessionFactory sessionFactory)
@@ -102,6 +102,6 @@ public class BlogDaoImpl implements BlogDao {
 		}
 	}
 	
-
+*/
 
 }

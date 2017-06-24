@@ -4,27 +4,27 @@ import org.springframework.context.annotation.ComponentScan;
 
 import org.springframework.context.annotation.Configuration;
 
-import org.springframework.messaging.simp.config.MessageBrokerRegistry;
+//import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 
-import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
+/*import org.springframework.web.socket.config.annotation.AbstractWebSocketMessageBrokerConfigurer;
 
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
 
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
+*/
 
-
-@Configuration
+/*@Configuration
 
 @EnableWebSocketMessageBroker
 
-@ComponentScan(basePackages = "com.niit")
+@ComponentScan(basePackages = "com.niit")*/
 
-public class WebSocketConfigu extends AbstractWebSocketMessageBrokerConfigurer
+public class WebSocketConfigu /*extends AbstractWebSocketMessageBrokerConfigurer*/
  {
 
 	
-     @Override
+    /* @Override
 	
 	public void configureMessageBroker(MessageBrokerRegistry config) 
 	{
@@ -46,5 +46,5 @@ public class WebSocketConfigu extends AbstractWebSocketMessageBrokerConfigurer
 		registry.addEndpoint("/privatechat").withSockJS();
 
 	}
-
+*/
 }

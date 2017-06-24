@@ -1,14 +1,15 @@
 package com.niit.discussionB.restControllers;
 
-import java.util.List;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.niit.discussionB.dao.UserDao;
-import com.niit.discussionB.model.Blog;
 import com.niit.discussionB.model.User;
 
+@CrossOrigin(origins = {"http://localhost:9007"}, maxAge = 4800, allowCredentials = "false")
 @RestController
 public class UserController 
 {
@@ -31,26 +32,57 @@ public class UserController
 	@Autowired
 	private User user;
 	
-
-	@RequestMapping(value = "/createusers/", method = RequestMethod.POST)
-	public ResponseEntity<User> createusers(@RequestBody User user, HttpSession session) {
-		log.debug("-->CALLING METHOD CREATE BLOG");
-		String userid = (String) session.getAttribute("loggedInUserId");
-		user.setId(userid);
+	/*@CrossOrigin(origins = {"http://localhost:9007"}, maxAge = 6000)
+	@RequestMapping(value="user", method=RequestMethod.PUT)
+	public User registerUser(@RequestBody User registerUser){
+		System.out.println("In Rest Controller");
+		userDao.save(registerUser);
+		return registerUser;
+	}*/
+	/*@RequestMapping("/user")
+	public void register(HttpServletRequest request){
+		String name=request.getParameter("txtUser");
+		String email=request.getParameter("rEmail");
+		String password=request.getParameter("rPassword");
 		
-		userDao.save(user);
-		return new ResponseEntity<User>(user, HttpStatus.OK);
-	}
+		user=new User();
+		user.setName(name);
+		user.setPassword(password);
+		user.setMail(email);
+		
+		userDao.save(user);		
+		
+	}*/
+	/*@PostMapping("/user")*/
 	
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public ResponseEntity<List<User>> fetchAllUsers() {
-		log.debug("-->CALLING METHOD LIST ALL USERS");
-		List<User> users = userDao.list();
+	
+	@RequestMapping(value="/user", method=RequestMethod.POST) 
+	//public String addUser(@RequestBody User user)
+	
+	/*public ResponseEntity<User> addUser(@RequestBody User user)*/
+	public ResponseEntity<User> addUser(@RequestBody User user)
+	{	  
+		System.out.println("In.....REgistration..."+user);
+		user.setOnline(true);
+		userDao.save(user);
 		
-		if (users.isEmpty()) {
-			return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<User>>(users, HttpStatus.OK);
-
+	    /*user.setStatus('N');
+	    user.setIsOnline('N');
+		boolean value = userDao.save(user);
+		if (value == true) 
+		{
+			user.setErrorCode("200");
+			user.setErrorMsg("User added Successfully");
+		} 
+		else 
+		{
+			user.setErrorCode("100");
+			user.setErrorMsg("Add User Failed");
+		}*/
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+		
+		/*return "Fine"+user;*/
 	}
+
+	
 }

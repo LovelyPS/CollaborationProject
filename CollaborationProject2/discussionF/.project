@@ -3,6 +3,7 @@
 	<name>discussionF</name>
 	<comment></comment>
 	<projects>
+		<project>discussionB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

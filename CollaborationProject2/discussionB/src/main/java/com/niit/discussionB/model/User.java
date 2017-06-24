@@ -1,6 +1,8 @@
 package com.niit.discussionB.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
@@ -10,18 +12,28 @@ import org.springframework.stereotype.Component;
 public class User extends BaseDomain
 {
 	@Id
-	private String id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 	private String name;
 	private String password;
 	private String address;
 	private boolean status;
 	private boolean isOnline;
+	private String mail;
 	
 	
+	
+	
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 	public User() {
 		super();
 	}
-	public User(String id, String name, String password, String address, boolean status, boolean isOnline) {
+	public User(int id, String name, String password, String address, boolean status, boolean isOnline) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,10 +42,10 @@ public class User extends BaseDomain
 		this.status = status;
 		this.isOnline = isOnline;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -66,6 +78,12 @@ public class User extends BaseDomain
 	public void setOnline(boolean isOnline) {
 		this.isOnline = isOnline;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address + ", status="
+				+ status + ", isOnline=" + isOnline + ", mail=" + mail + "]";
+	}
+	
 	
 
 }
