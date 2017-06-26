@@ -1,7 +1,6 @@
 package com.niit.discussionB.restControllers;
 
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,43 +31,18 @@ public class UserController
 	@Autowired
 	private User user;
 	
-	/*@CrossOrigin(origins = {"http://localhost:9007"}, maxAge = 6000)
-	@RequestMapping(value="user", method=RequestMethod.PUT)
-	public User registerUser(@RequestBody User registerUser){
-		System.out.println("In Rest Controller");
-		userDao.save(registerUser);
-		return registerUser;
-	}*/
-	/*@RequestMapping("/user")
-	public void register(HttpServletRequest request){
-		String name=request.getParameter("txtUser");
-		String email=request.getParameter("rEmail");
-		String password=request.getParameter("rPassword");
-		
-		user=new User();
-		user.setName(name);
-		user.setPassword(password);
-		user.setMail(email);
-		
-		userDao.save(user);		
-		
-	}*/
-	/*@PostMapping("/user")*/
 	
 	
 	@RequestMapping(value="/user", method=RequestMethod.POST) 
-	//public String addUser(@RequestBody User user)
-	
-	/*public ResponseEntity<User> addUser(@RequestBody User user)*/
 	public ResponseEntity<User> addUser(@RequestBody User user)
 	{	  
 		System.out.println("In.....REgistration..."+user);
-		user.setOnline(true);
+		user.setStatus('N');
+	    user.setIsOnline('N');
 		userDao.save(user);
 		
-	    /*user.setStatus('N');
-	    user.setIsOnline('N');
-		boolean value = userDao.save(user);
+	   
+	    /*boolean value = userDao.save(user);
 		if (value == true) 
 		{
 			user.setErrorCode("200");
@@ -81,8 +55,66 @@ public class UserController
 		}*/
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 		
-		/*return "Fine"+user;*/
 	}
+	
+	@RequestMapping(value="/login", method=RequestMethod.POST) 
+	public ResponseEntity<User> validateUser(@RequestBody User user) 
+	{
+		System.out.println(user);
+		boolean value = userDao.validate(user.getUsername(), user.getPassword());
+		
+		System.out.println(value);
+		if (value == false) 
+		{
+			user = new User();
+			user.setErrorCode("404");
+			user.setErrorMessage("Wrong username or password.");
+			System.out.println("Wrong username or password.");
+		}
+		else
+		{
+			user=userDao.get(user.getUsername());
+			if(user.getStatus()=='R')
+			{
+				user = new User();
+				user.setErrorCode("404");
+				user.setErrorMessage("Registeration is rejected. Please Contact Admin");
+				System.out.println("Registeration is rejected. Please Contact Admin");
+				
+			}
+			if(user.getStatus()=='N')
+			{
+				user = new User();
+				user.setErrorCode("404");
+				user.setErrorMessage("Registeration approval is pending. Please try again later");
+				System.out.println("Registeration approval is pending. Please try again later");
+			}
+			else
+			{
+				
+				user.setIsOnline('Y');
+				/*Date_Time dt = new Date_Time();
+				user.setLast_seen(dt.getDateTime());*/
+				/*userDao.update(user);*/
+				 /*
+				friendDAO.setUsersOnline(user.getUsername());
+				session.setAttribute("username", user.getUsername());
+				session.setAttribute("role", user.getRole());
+				session.setAttribute("isLoggedIn", "true");
+				if(user.getDob()!=null)
+					user.setBirthdate( dt.toStringDate(user.getDob()));*/
+				
+				user.setErrorCode("200");
+				user.setErrorMessage("Success");
+				System.out.println("Success");
+				/*System.out.println("Name = "+session.getAttribute("username").toString());
+				System.out.println("Role = "+session.getAttribute("role").toString());*/
+			}
+		}
+
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
 
 	
 }

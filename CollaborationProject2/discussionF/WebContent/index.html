@@ -11,28 +11,70 @@
 
 
 <div data-ng-app="myApp">
-<div data-ng-controller="NavbarCtrl as nData">  
-<nav class="navbar navbar-inverse" role="navigation">
+<div data-ng-controller="NavbarCtrl as ctrl">
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-        <a class="navbar-brand" data-ui-sref="homeState" tabindex="-1">Discuss</a>
-    </div>
-   
-    <ul class="nav navbar-nav navbar-right">
-		<li><a data-ng-hide="nData.authUser.authenticated" data-ng-click="nData.openRegisterModal()" class="clickable" tabindex="-1">Register</a></li>
-		<li><a data-ng-hide="nData.authUser.authenticated" data-ng-click="nData.openLoginModal()" class="clickable" tabindex="-1">Login</a></li>
-        <li data-ng-show="nData.authUser.authenticated" data-ng-click="nData.openUserModal()"><p id="userProfileBtn" class="navbar-text clickable">{{nData.authUser.name}}</p></li>
-        <li><a data-ui-sref="logoutState" data-ng-show="nData.authUser.name" tabindex="-1">Logout</a></li>
-    </ul>
-  </div>
-    
+      <ul class="nav navbar-nav navbar-left">
+      			<li><a href="#/"><img alt="GS" src="resources/images/logo.png" height="50" width="60"></a></li>
+      			<li><font style="font-size: 35px"><a class="navbar-brand" style="color: red;" href="#/">
+      			<strong>Discussion</strong></a></font></li>
+   	  </ul>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+   	</div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+      		<li data-ng-if="currentUser.role=='ADMIN'">
+				<a style="color: white" href="#/admin">MANAGE WEBSITE</a></li>
+     		<li data-ng-show="currentUser.username">
+     			<img data-ng-src="images/{{currentUser.username}}" onerror="this.src='images/profilepic.png'" class="img-circle" height="35" width="35"></li>
+     		<li data-ng-show="currentUser.username">
+				<a style="color: white" href="#/myProfile"> Welcome, {{currentUser.first_name}}</a></li>
+			<li data-ng-show="!currentUser.username">
+				<a style="color: white" href="#/login"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+			<li data-ng-show="currentUser.username">
+				<a style="color: white" href="" data-ng-click = "ctrl.logout()"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
+			<li data-ng-show="!currentUser.username">
+				<a style="color: white" href="#/register"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
+			
+	</ul>
+<!--       <form class="navbar-form navbar-left"> -->
+<!--         <div class="form-group"> -->
+<!--           <input type="text" class="form-control" placeholder="Search"> -->
+<!--         </div> -->
+<!--         <button type="submit" class="btn btn-default">Submit</button> -->
+<!--       </form> -->
+      <ul class="nav navbar-nav navbar-left">
+        <li><a style="color: white" href="#/viewBlogs">BLOGS</a></li>
+       	<li><a style="color: white" href="#/viewForums">FORUMS</a></li>
+       	<li><a style="color: white" href="#/viewJobs">JOB HUNT</a></li>
+       	<li><a style="color: white" href="#/viewEvents">EVENTS</a></li>
+       	<li data-ng-show="currentUser.username">
+				<a style="color: white" href="#/viewUsers"><span class="glyphicon glyphicon-user"></span>SEARCH USERS</a></li>
+	 </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
+
+.<hr><br>
 </div>
-<data-scroll-to-top></data-scroll-to-top>
+
+<div class="container" data-ng-view></div>
+
+</nav>
 
 <!--   Placeholder for templates -->
   <div data-ui-view></div>
- <div class="container"  style="float: left;" data-ng-controller="RegiCtrl as rData">
+ <div class="container"  style="float: left;" data-ng-controller="UserController as rData">
    <div id="signup">
       <div class="signup-screen">
          <div class="space-bot text-center">
@@ -41,24 +83,56 @@
          </div>
          <br/>
            <form class="form-register" method="post" name="register" data-ng-submit="rData.register()" novalidate>
+	            <h3>Account Details</h3>
+           		
 	            <div class="input-field col s6">
-              <input id="first-name" type="text" name="txtFirstName" data-ng-model="rData.newUser.name" class="validate" data-ng-required>
-              <label for="first-name">First Name</label>
-            </div> <br/>
-            <!-- <div class="input-field col s6">
-              <input id="last-name" type="text" name="txtLastName" data-ng-model="rData.newUser.lastName" class="validate" data-ng-required>
-              <label for="last-name">Last Name</label>
-             </div> <br/> -->
-             <div class="input-field col s6">
-              <input id="email" type="email" name="remail" data-ng-model="rData.newUser.mail" class="validate" data-ng-required>
-              <label for="email">Email</label>
-             </div> <br/>
-             <span class="alert alert-danger" data-ng-show="form-register.rData.newUser.mail.$error.email">Your email is invalid.</span>
-             <div class="input-field col s6">
-               <input id="password" type="password" name="rpassword" data-ng-model="rData.newUser.password" data-ng-minlength='6' class="validate" data-ng-required>
-               <label for="password">Password</label>
-              </div> <br/>
-              <p class="alert alert-danger" data-ng-show="form-register.rData.newUser.password.$error.minlength && form.password.$invalid">Your password must be at least 6 characters.</p>
+	            		<label for="username">User Name</label>
+                      	<input id="username" type="text" name="username" data-ng-model="rData.newUser.username" class="validate" data-ng-required>
+              	</div> <br/>
+              	
+              	<div class="input-field col s6">
+             			<label for="email">Email</label>
+              			<input id="email" type="email" name="remail" data-ng-model="rData.newUser.mail" class="validate" data-ng-required>
+               	</div> <br/>
+               	<span class="alert alert-danger" data-ng-show="form-register.rData.newUser.mail.$error.email">Your email is invalid.</span>
+              	
+              	<div class="input-field col s6">
+              			<label for="password">Password</label>
+               			<input id="password" type="password" name="rpassword" data-ng-model="rData.newUser.password" data-ng-minlength='6' class="validate" data-ng-required>
+               	</div> <br/>
+               	<p class="alert alert-danger" data-ng-show="form-register.rData.newUser.password.$error.minlength && form.password.$invalid">Your password must be at least 6 characters.</p>
+               	
+               	<h3>Personal Details</h3>
+           		<div class="divider"></div>
+              
+	            <div class="input-field col s6">
+	            		<label for="f_name">First Name</label>
+              			<input id="f_name" type="text" name="f_name" data-ng-model="rData.newUser.f_name" class="validate" data-ng-required>
+                </div> <br/>
+                
+                <div class="input-field col s6">
+                		<label for="last-name">Last Name</label>
+              			<input id="last-name" type="text" name="txtLastName" data-ng-model="rData.newUser.l_name" class="validate" data-ng-required>
+               	</div> <br/>
+               	
+               	<div class="input-field col s6">
+             	<label for="role">Role</label>
+                    <select data-ng-model='rData.newUser.role' required="required" id="role">
+                        <option value="STUDENT">STUDENT</option>
+                        <option value="ALUMINI">ALUMINI</option>
+                        <option value="FACULTY">FACULTY</option>
+                    </select>
+                </div><br/>
+                
+                <div class="input-field col s6">
+                <label>Gender</label>
+                    <input type="radio" name="gender" data-ng-model='rData.newUser.gender' value="M" checked="checked"/>
+                    <label class="gender">Male</label>
+                    <input type="radio" name="gender" data-ng-model='rData.newUser.gender' value="F"/>
+                    <label class="gender">Female</label>
+                </div>
+                
+              
               <div class="space-top text-center">
                <button data-ng-disabled="form-register.$invalid" class="waves-effect waves-light btn done">
                <i class="material-icons left">done</i> Done
@@ -67,30 +141,32 @@
                <i class="material-icons left">clear</i>Cancel
                </button>
               </div>
+              
              </form>
            </div>
         </div>
     </div>
    
- <div class="container" style="float:right;" data-ng-controller="LoginCtrl"	>
+ <div class="container" style="float:right;" data-ng-controller="UserController as lCtrl"	>
    <div id="signin">
       <div class="signup-screen">
          <div class="space-bot text-center">
             <h1>Sign in</h1>
            <div class="divider"></div>
          </div>
-           <form class="form-login" method="post" name="login" novalidate>
+           <form class="form-login" method="post" name="login" data-ng-submit="lCtrl.login()" novalidate>
 	            
              <div class="input-field col s6">
-              <input id="email" type="email" name="lemail" data-ng-model="lemail" class="validate" required>
-              <label for="email">Email</label>
+              <input id="email" type="text" name="lemail" data-ng-model="lCtrl.newUser.username" class="validate" required>
+              <label for="email">User Name</label>
              </div>
-             <p class="alert alert-danger" data-ng-show="form-login.lemail.$error.email">Your email is invalid.</p>
-             <div class="input-field col s6">
-               <input id="password" type="password" name="lpassword" data-ng-model="lpassword" data-ng-minlength='6' class="validate" required>
+             <!-- <p class="alert alert-danger" data-ng-show="form-register.lCtrl.newUser.username.$error.email">Your email is invalid.</p>
+              -->
+              <div class="input-field col s6">
+               <input id="password" type="password" name="lpassword" data-ng-model="lCtrl.newUser.password" data-ng-minlength='6' class="validate" required>
                <label for="password">Password</label>
               </div>
-              <p class="alert alert-danger" data-ng-show="form-login.lpassword.$error.minlength || form.password.$invalid">Your password must be at least 6 characters.</p>
+              <p class="alert alert-danger" data-ng-show="form-register.lCtrl.newUser.password.$error.minlength || form.password.$invalid">Your password must be at least 6 characters.</p>
               <div class="space-top text-center">
                <button data-ng-disabled="form-login.$invalid" class="waves-effect waves-light btn done">
                <i class="material-icons left">done</i> Done

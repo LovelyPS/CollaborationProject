@@ -6,22 +6,9 @@ angular.module("myApp")
 	serviceData.authUser = {};
 	
 	
-	/*serviceData.register = function(user){
-		
-		return $http({
-			method:'PUT',
-			url:"user/",
-			data:user
-		}).then(function(response){
-			return response;
-		}, function(response){
-			throw response;
-		});
-	}*/
 	console.log("Entering UserService")
 	var BASE_URL = "http://localhost:9007/discussionB/"
 		return{
-		//var userService = this;
 		
 		register: function(user)
 		{
@@ -39,9 +26,64 @@ angular.module("myApp")
 					console.log(errResponse.status)
 					return errResponse.status
 				});
+		},
+		authenticate: function(user)
+		{
+			console.log("Entering Function Validate User")
+			console.log(user)
+			return $http.post(BASE_URL + "login", user)
+			.then(
+					function(response)
+					{
+						alert(response.data.errorMessage)
+						if(response.data.errorMessage == "Success")
+							{
+							console.log("Validation Success")
+								/*$rootScope.currentUser = 
+									{
+										username: response.data.username,
+										first_name: response.data.first_name,
+										last_name: response.data.last_name,
+										dob: response.data.user.dob,
+										gender: response.data.gender,
+										mail_id: response.data.mail_id,
+										status: response.data.status,
+										role: response.data.role,
+										birthdate: response.data.birthdate,
+										isOnline: response.data.isOnline,
+										last_seen: response.data.last_seen
+									};*/
+							}
+						else
+							{
+							console.log("Invalid User name or password")
+							}
+						
+						return response.data;
+					},
+					function(errResponse)
+					{
+						/*$rootScope.userLoggedIn = false;
+						console.error(errResponse.status);*/
+						console.error("Error while validating");
+						/*return $q.reject(errResponse);*/
+					});
 		}
 	}
 		
+
+	/*serviceData.register = function(user){
+		
+		return $http({
+			method:'PUT',
+			url:"user/",
+			data:user
+		}).then(function(response){
+			return response;
+		}, function(response){
+			throw response;
+		});
+	}*/
 	
 });
 	

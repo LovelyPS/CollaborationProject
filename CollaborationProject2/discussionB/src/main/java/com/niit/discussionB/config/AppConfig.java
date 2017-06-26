@@ -27,7 +27,7 @@ public class AppConfig{
 
 		DriverManagerDataSource ds = new DriverManagerDataSource();
 		ds.setDriverClassName("org.h2.Driver");
-		ds.setUrl("jdbc:h2:tcp://localhost/~/dissDb");
+		ds.setUrl("jdbc:h2:tcp://localhost/~/disscuDb");
 		ds.setUsername("sa");
 		ds.setPassword("");
 		return ds;

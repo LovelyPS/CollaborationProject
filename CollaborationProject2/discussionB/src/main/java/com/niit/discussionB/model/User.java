@@ -12,47 +12,57 @@ import org.springframework.stereotype.Component;
 public class User extends BaseDomain
 {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
-	private String name;
+	private String username;
+	private String f_name;
+	private String l_name;
+	private char gender;
 	private String password;
-	private String address;
-	private boolean status;
-	private boolean isOnline;
+	private char status;
+	private char isOnline;
 	private String mail;
-	
-	
-	
-	
-	public String getMail() {
-		return mail;
-	}
-	public void setMail(String mail) {
+	private String role;
+	private String last_seen;
+	public User(String username, String f_name, String l_name, char gender, String password, char status,
+			char isOnline, String mail, String role, String last_seen) {
+		super();
+		this.username = username;
+		this.f_name = f_name;
+		this.l_name = l_name;
+		this.gender = gender;
+		this.password = password;
+		this.status = status;
+		this.isOnline = isOnline;
 		this.mail = mail;
+		this.role = role;
+		this.last_seen = last_seen;
 	}
 	public User() {
 		super();
 	}
-	public User(int id, String name, String password, String address, boolean status, boolean isOnline) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.password = password;
-		this.address = address;
-		this.status = status;
-		this.isOnline = isOnline;
+	
+	public String getUsername() {
+		return username;
 	}
-	public int getId() {
-		return id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public String getF_name() {
+		return f_name;
 	}
-	public String getName() {
-		return name;
+	public void setF_name(String f_name) {
+		this.f_name = f_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public String getL_name() {
+		return l_name;
+	}
+	public void setL_name(String l_name) {
+		this.l_name = l_name;
+	}
+	public char getGender() {
+		return gender;
+	}
+	public void setGender(char gender) {
+		this.gender = gender;
 	}
 	public String getPassword() {
 		return password;
@@ -60,29 +70,46 @@ public class User extends BaseDomain
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public boolean isStatus() {
+	public char getStatus() {
 		return status;
 	}
-	public void setStatus(boolean status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
-	public boolean isOnline() {
+	public char getIsOnline() {
 		return isOnline;
 	}
-	public void setOnline(boolean isOnline) {
+	public void setIsOnline(char isOnline) {
 		this.isOnline = isOnline;
+	}
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	public String getLast_seen() {
+		return last_seen;
+	}
+	public void setLast_seen(String last_seen) {
+		this.last_seen = last_seen;
 	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", password=" + password + ", address=" + address + ", status="
-				+ status + ", isOnline=" + isOnline + ", mail=" + mail + "]";
+		return "User [username=" + username + ", f_name=" + f_name + ", l_name=" + l_name + ", gender="
+				+ gender + ", password=" + password + ", status=" + status + ", isOnline=" + isOnline + ", mail=" + mail
+				+ ", role=" + role + ", last_seen=" + last_seen + "]";
 	}
+	
+	
+	
+	
 	
 	
 
