@@ -35,7 +35,7 @@ angular.module("myApp")
 			.then(
 					function(response)
 					{
-						alert(response.data.errorMessage)
+						
 						if(response.data.errorMessage == "Success")
 							{
 							console.log("Validation Success")
@@ -68,22 +68,27 @@ angular.module("myApp")
 						console.error("Error while validating");
 						/*return $q.reject(errResponse);*/
 					});
+		},
+		logout: function()
+		{
+			console.log("Entering Logout")
+			return $http.get(BASE_URL + "logout")
+			.then
+			(
+				function(response)
+				{
+					return response.data;
+				},
+				function (errResponse)
+				{
+					console.log("Error Logging out");
+					return /*$q.reject(errResponse)*/"logout Successfull";
+				}
+			);
 		}
 	}
 		
 
-	/*serviceData.register = function(user){
-		
-		return $http({
-			method:'PUT',
-			url:"user/",
-			data:user
-		}).then(function(response){
-			return response;
-		}, function(response){
-			throw response;
-		});
-	}*/
 	
 });
 	

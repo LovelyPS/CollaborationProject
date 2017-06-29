@@ -14,6 +14,7 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.discussionB.model.Blog;
 import com.niit.discussionB.model.User;
 
 @Configuration
@@ -49,6 +50,7 @@ public class AppConfig{
 		builder.addProperties(getHibernateProperties());
 		// builder.scanPackages("com.niit.ecomm_backend");
 		builder.addAnnotatedClass(User.class);
+		builder.addAnnotatedClass(Blog.class);
 		return builder.buildSessionFactory();
 	}
 

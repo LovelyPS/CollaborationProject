@@ -74,9 +74,11 @@ public class UserController
 		else
 		{
 			user=userDao.get(user.getUsername());
+			System.out.println("User Exist..");
+			System.out.println(user);
 			if(user.getStatus()=='R')
 			{
-				user = new User();
+				
 				user.setErrorCode("404");
 				user.setErrorMessage("Registeration is rejected. Please Contact Admin");
 				System.out.println("Registeration is rejected. Please Contact Admin");
@@ -84,7 +86,7 @@ public class UserController
 			}
 			if(user.getStatus()=='N')
 			{
-				user = new User();
+				
 				user.setErrorCode("404");
 				user.setErrorMessage("Registeration approval is pending. Please try again later");
 				System.out.println("Registeration approval is pending. Please try again later");
@@ -111,7 +113,8 @@ public class UserController
 				System.out.println("Role = "+session.getAttribute("role").toString());*/
 			}
 		}
-
+		System.out.println("At Last....");
+		System.out.println(user);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	

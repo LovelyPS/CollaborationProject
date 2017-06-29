@@ -1,78 +1,84 @@
 package com.niit.discussionB.model;
 
-import java.util.Date;
-import java.util.UUID;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Lob;
+import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 @Entity
+@Table(name = "C_BLOG")
 @Component
 public class Blog extends BaseDomain
 {
-	
 	@Id
-	private String id;
-	private String title;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int blog_id;
+	private String blog_title;
+	@Lob
 	private String description;
-	private String userid;
-	private char status;
-	private String reason;
-	private Date posted_dt;
+	private String username;
+	private String status;
+	private String date_time;
+	@Lob
+	private String rejected;
 	
-	public Date getPosted_dt() {
-		return posted_dt;
+	public int getBlog_id() {
+		return blog_id;
 	}
-	public void setPosted_dt(Date posted_dt) {
-		if(posted_dt==null)
-		{
-			posted_dt= new Date(System.currentTimeMillis());
-		}
-		this.posted_dt = posted_dt;
+
+	public void setBlog_id(int blog_id) {
+		this.blog_id = blog_id;
 	}
-	
-	public String getId() {
-		return id;
+
+	public String getBlog_title() {
+		return blog_title;
 	}
-	public void setId(String id) {
-		this.id = id;
+
+	public void setBlog_title(String blog_title) {
+		this.blog_title = blog_title;
 	}
-	public String getTitle() {
-		return title;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDate_time() {
+		return date_time;
+	}
+
+	public void setDate_time(String date_time) {
+		this.date_time = date_time;
+	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getUserid() {
-		return userid;
+
+	public String getRejected() {
+		return rejected;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public char getStatus() {
-		return status;
-	}
-	public void setStatus(char status) {
-		this.status = status;
-	}
-	public String getReason() {
-		return reason;
-	}
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-	public  Blog()
-	{
-		this.id="BLOG" + UUID.randomUUID().toString().substring(24).toUpperCase();
+
+	public void setRejected(String rejected) {
+		this.rejected = rejected;
 	}
 	
-		
 }
