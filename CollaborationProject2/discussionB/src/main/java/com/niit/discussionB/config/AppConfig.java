@@ -15,6 +15,7 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.discussionB.model.Blog;
+import com.niit.discussionB.model.FileUpload;
 import com.niit.discussionB.model.User;
 
 @Configuration
@@ -48,9 +49,10 @@ public class AppConfig{
 	public SessionFactory sessionFactory(DataSource dataSource) {
 		LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource);
 		builder.addProperties(getHibernateProperties());
-		// builder.scanPackages("com.niit.ecomm_backend");
+		
 		builder.addAnnotatedClass(User.class);
 		builder.addAnnotatedClass(Blog.class);
+		builder.addAnnotatedClass(FileUpload.class);
 		return builder.buildSessionFactory();
 	}
 

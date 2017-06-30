@@ -8,7 +8,7 @@ public interface UserDao
 {
 	public User get(String id);
 	public void save(User u);
-	public void update(User u);
+	public boolean update(User u);
 	public List<User> list();
 	public boolean validate(String id,String password);
 

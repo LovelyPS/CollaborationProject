@@ -2,6 +2,10 @@ package com.niit.discussionB.restControllers;
 
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,30 @@ public class UserController
 	@Autowired
 	private User user;
 	
+	@Autowired
+	HttpSession session;
+	
+	
+	@RequestMapping("/getUserList")
+	public ResponseEntity<List<User>> getUserList() throws NullPointerException
+	{
+			List<User> list = userDao.list();
+			if (list.isEmpty()) 
+			{
+				user.setErrorCode("100");
+				user.setErrorMessage("Users are not available");
+			}
+			else
+			{
+				
+				for(User user : list)
+				{
+					user.setErrorCode("200");
+					user.setErrorMessage("Success");
+				}
+			}
+			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+	}
 	
 	
 	@RequestMapping(value="/user", method=RequestMethod.POST) 
@@ -97,13 +125,13 @@ public class UserController
 				user.setIsOnline('Y');
 				/*Date_Time dt = new Date_Time();
 				user.setLast_seen(dt.getDateTime());*/
-				/*userDao.update(user);*/
-				 /*
-				friendDAO.setUsersOnline(user.getUsername());
+				userDao.update(user);
+				 
+				/*friendDAO.setUsersOnline(user.getUsername());*/
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("role", user.getRole());
 				session.setAttribute("isLoggedIn", "true");
-				if(user.getDob()!=null)
+				/*if(user.getDob()!=null)
 					user.setBirthdate( dt.toStringDate(user.getDob()));*/
 				
 				user.setErrorCode("200");
@@ -115,6 +143,27 @@ public class UserController
 		}
 		System.out.println("At Last....");
 		System.out.println(user);
+		return new ResponseEntity<User>(user, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/updateUser", method=RequestMethod.POST) 
+	public ResponseEntity<User> updateUser(@RequestBody User user)
+	{
+		if(user != null)
+		{
+			boolean value = userDao.update(user);
+			if (value == true) 
+			{
+				user.setErrorCode("200");
+				user.setErrorMessage("User updated Successfully");
+			} 
+			else 
+			{
+				user.setErrorCode("100");
+				user.setErrorMessage("Add User Failed");
+				return null;
+			}
+		}
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}
 	

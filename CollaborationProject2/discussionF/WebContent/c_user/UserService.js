@@ -69,6 +69,18 @@ angular.module("myApp")
 						/*return $q.reject(errResponse);*/
 					});
 		},
+		listUser: function()
+		{
+			console.log("Entering Function List User")
+			return $http.get(BASE_URL + "getUserList")
+			.then(function(response)
+				{
+//					console.log(response.data)
+					console.log("Recieved List Users "+response.status)
+					return response.data
+		
+				})
+		},
 		logout: function()
 		{
 			console.log("Entering Logout")

@@ -19,7 +19,15 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
         .when('/manageUsers',
 			{
 				templateUrl : 'c_admin/mUsers.html',	
-				controller : 'AdminController'
+				
+			})
+			.when('/myProfile',
+			{
+				templateUrl : 'c_user/myProfile.html',
+			})
+			.when('/upload',
+			{
+				templateUrl : 'c_user/fileUpload.html',
 			})
         .when('/manageBlogs',
 			{
@@ -147,7 +155,7 @@ myApp.controller("UserController", function(UserService,$scope,$location,$rootSc
 							first_name: $scope.user.f_name,
 							last_name: $scope.user.l_name,
 							gender: $scope.user.gender,
-							mail_id: $scope.user.mail_id,
+							mail_id: $scope.user.mail,
 							status: $scope.user.status,
 							role: $scope.user.role,
 							isOnline: $scope.user.isOnline,
@@ -174,14 +182,15 @@ myApp.controller("UserController", function(UserService,$scope,$location,$rootSc
 	};
 	self.logout= function()
 	{
-		document.getElementById("mySidenav").style.width = "0";
-	    document.getElementById("main").style.marginLeft= "0";
+		
 		console.log("Entering Logout Function");
 		$rootScope.currentUser = {};
 		$cookieStore.remove('currentUser');
 		
 		console.log("Calling Session Logout");
-		UserService.logout()
+		/*UserService.logout()*/
+		document.getElementById("mySidenav").style.width = "0";
+	    document.getElementById("main").style.marginLeft= "0";
 		$location.path('/login');
 	};
 

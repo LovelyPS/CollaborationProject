@@ -2,6 +2,7 @@ package com.niit.discussionB.daoImpl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,31 @@ public class UserDaoImpl implements UserDao
 
 	}
 
-	public void update(User u) {
-		// TODO Auto-generated method stub
+	@Transactional
+	public boolean update(User u) 
+	{
+		try
+		{
+			sessionFactory.getCurrentSession().saveOrUpdate(u);
+			
+			return true;
+		}
+		catch(Exception ex)
+		{
+			
+			ex.printStackTrace();
+			return false;
+		}
 
 	}
-
+    
+	@Transactional
 	public List<User> list() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM User");
+		
+		return (List<User>)query.list();
 	}
 
 	@Transactional
@@ -69,6 +87,9 @@ public class UserDaoImpl implements UserDao
 			{
 				user.setErrorCode("200");
 				user.setErrorMessage("User Not Found");
+				/*sessionFactory.getCurrentSession().setAttribute("username", user.getUsername());
+				sessionFactory.getCurrentSession().setAttribute("role", user.getRole());
+				sessionFactory.getCurrentSession().setAttribute("isLoggedIn", "true");*/
 				return true;
 			}
 			else

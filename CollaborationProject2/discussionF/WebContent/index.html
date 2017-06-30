@@ -85,7 +85,7 @@ body {
       		<li data-ng-if="currentUser.role=='ADMIN'">
 				<a style="color: white" href="#/admin">MANAGE WEBSITE</a></li>
      		<li data-ng-show="currentUser.username">
-     			<img data-ng-src="images/{{currentUser.username}}" onerror="this.src='resources/images/adminpic.png'" class="img-circle" height="35" width="35"></li>
+     			<img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/adminpic.png'" class="img-circle" height="35" width="35"></li>
      		<li data-ng-show="currentUser.username">
 				<a style="color: white" href="#/myProfile"> Welcome, {{currentUser.first_name}}</a></li>
 			<li data-ng-show="!currentUser.username">
