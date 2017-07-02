@@ -1,14 +1,14 @@
-myApp.controller('AdminController', function($scope, $location, AdminService, UserService, $rootScope, $http)
+myApp.controller('AdminController', function($scope, $location,  AdminService, UserService, BlogService, ForumService, JobService, EventService, $rootScope, $http)
 {
 	console.log("Admin Controller")
 	var self=this;
 	
 	$scope.users;
-	/*$scope.blogs;
+	$scope.blogs;
 	$scope.jobs;
 	$scope.forums;
 	$scope.events;
-	$scope.appliedJobs;*/
+	$scope.appliedJobs;
 	
 	getUsers = function()
 	{
@@ -25,7 +25,7 @@ myApp.controller('AdminController', function($scope, $location, AdminService, Us
 	}
 	getUsers();
 	
-	/*getJobs = function()
+	getJobs = function()
 	{
 		console.log("Entering Get Jobs")
 		JobService.listJob()
@@ -112,7 +112,7 @@ myApp.controller('AdminController', function($scope, $location, AdminService, Us
 				$location.path("/jred")
 			}
 		)		
-	}*/
+	}
 	
 	self.acceptUser = function(user)
 	{
@@ -145,7 +145,7 @@ myApp.controller('AdminController', function($scope, $location, AdminService, Us
 		)
 	}
 	
-	/*self.acceptBlog = function(blog)
+	self.acceptBlog = function(blog)
 	{
 		console.log("Entering Approve Blog")
 		blog.status = 'Approved'
@@ -212,6 +212,6 @@ myApp.controller('AdminController', function($scope, $location, AdminService, Us
 				$location.path("/ered")
 			}
 		)
-	}*/
+	}
 }
 );

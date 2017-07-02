@@ -1,5 +1,5 @@
 angular.module("myApp")
-.service("UserService", function($http){
+.service("UserService", function($http,$rootScope){
 	
 	var serviceData = this;
 	
@@ -81,6 +81,64 @@ angular.module("myApp")
 		
 				})
 		},
+		friendRequest: function(username)
+		{
+			console.log("Entering Service - Friend Request")
+			return $http.get(BASE_URL + "sendRequest-"+username)
+			.then
+			(
+				function(response)
+				{
+					return response.data;
+				},
+				function(errResponse)
+				{
+					console.log("Error Adding Friend");
+					return $q.reject(errResponse);
+				}
+			);
+		},
+		
+		applyJob: function(job)
+		{
+			console.log("Applying Job")
+			return $http.post(BASE_URL + "applyJob", job)
+			.then
+			(
+				function(response)
+				{
+					console.log("Job has been applied")
+					return response;
+				}
+			)
+		},
+		
+		getProfile: function(username)
+		{
+			console.log("Entering Get Friend")
+			return $http.get(BASE_URL + "getUser-"+username)
+			.then
+			(
+				function(response)
+				{
+					console.log("Friend Retrived")
+					$rootScope.friend = response.data;
+					return response;
+				}
+			)
+		},
+		getAppliedJobs: function()
+		{
+			console.log("Get Jobs in Service")
+			return $http.get(BASE_URL + "viewMyJobs")
+			.then(function(response)
+				{
+					console.log("Job List Retrived")
+					return response;
+				}
+			)
+		},
+		
 		logout: function()
 		{
 			console.log("Entering Logout")

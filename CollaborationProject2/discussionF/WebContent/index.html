@@ -19,7 +19,7 @@ body {
     background-color: #111;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    padding-top: 0px;
 }
 
 .sidenav a {
@@ -45,7 +45,7 @@ body {
 
 #main {
     transition: margin-left .5s;
-    padding: 16px;
+    padding-top: 80px;
 }
 
 @media screen and (max-height: 450px) {
@@ -54,10 +54,7 @@ body {
 }
 </style>
 </head>
-<body style="background-image: url('resources/images/bg.jpg');">
-
-
-
+<body style="background-image: url('resources/images/bg1.jpg');" >
 
 <div data-ng-app="myApp">
 <div data-ng-controller="UserController as ctrl">
@@ -66,6 +63,8 @@ body {
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <ul class="nav navbar-nav navbar-left">
+      			<li data-ng-if="currentUser.username">
+				<a style="font-size:30px;cursor:pointer;"  onClick="openNav()">&#9776; open </a></li>
       			<li><a href="#/"><img alt="GS" src="resources/images/logo.png" height="50" width="60"></a></li>
       			<li><font style="font-size: 35px"><a class="navbar-brand" style="color: red;" href="#/">
       			<strong>Discussion</strong></a></font></li>
@@ -82,28 +81,23 @@ body {
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-      		<li data-ng-if="currentUser.role=='ADMIN'">
-				<a style="color: white" href="#/admin">MANAGE WEBSITE</a></li>
+      		
      		<li data-ng-show="currentUser.username">
      			<img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/adminpic.png'" class="img-circle" height="35" width="35"></li>
      		<li data-ng-show="currentUser.username">
 				<a style="color: white" href="#/myProfile"> Welcome, {{currentUser.first_name}}</a></li>
 			<li data-ng-show="!currentUser.username">
-				<a style="color: white" href="#/login"><!-- <span class="glyphicon glyphicon-log-in"> --></span> LOGIN</a></li>
+				<a style="color: white" href="#/login"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
 			<li data-ng-show="currentUser.username">
-				<a style="color: white" href="" data-ng-click = "ctrl.logout()"><!-- <span class="glyphicon glyphicon-log-out"></span> --> LOGOUT</a></li>
+				<a style="color: white" href="" data-ng-click = "ctrl.logout()"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
 			<li data-ng-show="!currentUser.username">
-				<a style="color: white" href="#/register"><!-- <span class="glyphicon glyphicon-user"></span> --> SIGN UP</a></li>
+				<a style="color: white" href="#/register"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
 			
 	</ul>
 
       <ul class="nav navbar-nav navbar-left">
-       <!--  <li><a style="color: white" href="#/viewBlogs">BLOGS</a></li>
-       	<li><a style="color: white" href="#/viewForums">FORUMS</a></li>
-       	<li><a style="color: white" href="#/viewJobs">JOB HUNT</a></li>
-       	<li><a style="color: white" href="#/viewEvents">EVENTS</a></li> -->
        	<li data-ng-show="currentUser.username">
-				<a style="color: white" href="#/viewUsers"><!-- <span class="glyphicon glyphicon-user"> --></span>SEARCH USERS</a></li>
+				<a style="color: white" href="#/viewUsers"><span class="glyphicon glyphicon-user"></span>SEARCH USERS</a></li>
 	 </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -112,12 +106,17 @@ body {
 .<hr><br>
 </div>
 
-<div id="mySidenav" class="sidenav">
+<div id="mySidenav" class="sidenav" data-ng-show="currentUser.username">
   <a href="javascript:void(0)" class="closebtn" onClick="closeNav()">&times;</a>
-  <a href="#/manageUsers">MANAGE USERS</a>
-  <a href="#/manageBlogs">MANAGE BLOGS</a>
-  <a href="#/manageForums">MANAGE FORUMS</a>
-  <a href="#/manageJobs">MANAGE JOBS</a>
+  <a href="#/myProfile"><img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/adminpic.png'" class="img-circle" height="100" width="100"></a>
+  <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageUsers">MANAGE USERS</a>
+  <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageBlogs">MANAGE BLOGS</a>
+  <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageForums">MANAGE FORUMS</a>
+  <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageJobs">MANAGE JOBS</a>
+  <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewBlogs">BLOGS</a>
+  <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewForums">FORUMS</a>
+  <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewJobs">JOB HUNT</a>
+  <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewEvents">EVENTS</a>
 </div>
 
 
@@ -134,8 +133,25 @@ body {
     
 
 <script src="./c_user/UserService.js"></script>
+<script src="./c_user/UserListController.js"></script>
 <script src="./c_admin/AdminService.js"></script>
 <script src="./c_admin/AdminController.js"></script>
+<script src="./c_blog/BlogController.js"></script>
+<script src="./c_blog/BlogService.js"></script>
+<script src="./c_job/JobController.js"></script>
+<script src="./c_job/JobService.js"></script>
+<script src="./c_event/EventController.js"></script>
+<script src="./c_event/EventService.js"></script>
+<script src="./c_forum/ForumController.js"></script>
+<script src="./c_forum/ForumService.js"></script>
+<script src="./c_friend/FriendController.js"></script>
+<script src="./c_friend/FriendService.js"></script>
+<script src="./c_admin/AdminController.js"></script>
+<script src="./c_admin/AdminService.js"></script>
+
+
+<script src="./c_chat/ChatController.js"></script>
+<script src="./c_chat/ChatService.js"></script>
 
 <script type="text/javascript">
 function openNav() {

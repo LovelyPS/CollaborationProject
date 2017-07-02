@@ -15,7 +15,14 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.discussionB.model.Blog;
+import com.niit.discussionB.model.BlogComment;
+import com.niit.discussionB.model.Event;
 import com.niit.discussionB.model.FileUpload;
+import com.niit.discussionB.model.Forum;
+import com.niit.discussionB.model.ForumReply;
+import com.niit.discussionB.model.Friend;
+import com.niit.discussionB.model.Job;
+import com.niit.discussionB.model.JobApplied;
 import com.niit.discussionB.model.User;
 
 @Configuration
@@ -53,6 +60,13 @@ public class AppConfig{
 		builder.addAnnotatedClass(User.class);
 		builder.addAnnotatedClass(Blog.class);
 		builder.addAnnotatedClass(FileUpload.class);
+		builder.addAnnotatedClass(BlogComment.class);
+		builder.addAnnotatedClass(Event.class);
+		builder.addAnnotatedClass(Forum.class);
+		builder.addAnnotatedClass(ForumReply.class);
+		builder.addAnnotatedClass(Friend.class);
+		builder.addAnnotatedClass(Job.class);
+		builder.addAnnotatedClass(JobApplied.class);
 		return builder.buildSessionFactory();
 	}
 

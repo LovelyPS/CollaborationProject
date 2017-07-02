@@ -7,6 +7,10 @@ var myApp = angular.module("myApp", ['ngRoute', 'ngCookies']);
 
 myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$locationProvider) {
     $routeProvider
+       .when('/',
+    		{
+    			templateUrl : 'home.html',
+    		})
         .when("/login", {
             templateUrl: "c_user/login.html"
         })
@@ -31,18 +35,69 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 			})
         .when('/manageBlogs',
 			{
-				templateUrl : 'c_admin/mBlogs.html',
+				templateUrl : 'c_admin/manageBlogs.html',
 				controller : 'AdminController'
 			})
 			.when('/manageForums',
 			{
-				templateUrl : 'c_admin/mForums.html',
+				templateUrl : 'c_admin/manageForums.html',
 				controller : 'AdminController'
 			})
 		.when('/manageJobs',
 			{
-				templateUrl : 'c_admin/mJobs.html',
+				templateUrl : 'c_admin/manageJobs.html',
 				controller : 'AdminController'
+			})
+			.when('/viewUsers',
+	{
+		templateUrl : 'c_user/userList.html',
+		controller : 'UserListController'	
+	})
+	.when('/viewProfile',
+		{
+			templateUrl : 'c_friend/viewProfile.html',
+		})	
+		.when('/viewBlogs',
+	{
+		templateUrl : 'c_blog/blogs.html',
+		controller : 'BlogController'	
+	})
+	.when('/viewBlog',
+	{
+		templateUrl : 'c_blog/viewBlog.html',	
+	})
+	.when('/addBlogs',
+	{
+		templateUrl : 'c_blog/blogs.html',	
+	})
+		.when('/viewJobs',
+	{
+		templateUrl : 'c_job/jobs.html',
+		controller : 'JobController'	
+	})
+		.when('/viewForums',
+	{
+		templateUrl : 'c_forum/forums.html',
+		controller : 'ForumController'	
+	})
+		.when('/addForum',
+	{
+		templateUrl : 'c_forum/forums.html',
+	})	
+	.when('/viewForum',
+	{
+		templateUrl : 'c_forum/viewForum.html',
+	})
+	
+		.when('/viewEvents',
+			{
+				templateUrl : 'c_event/viewEvents.html',
+				controller : 'EventController'	
+			})
+		.when('/viewForums',
+			{
+				templateUrl : 'c_forum/forums.html',
+				controller : 'ForumController'	
 			})
 			
         .otherwise({
@@ -110,6 +165,7 @@ myApp.controller("UserController", function(UserService,$scope,$location,$rootSc
 	
     self.newUser = {};
     self.message = "";
+    
 	
     self.register = function(){
 		
@@ -188,11 +244,72 @@ myApp.controller("UserController", function(UserService,$scope,$location,$rootSc
 		$cookieStore.remove('currentUser');
 		
 		console.log("Calling Session Logout");
-		/*UserService.logout()*/
-		document.getElementById("mySidenav").style.width = "0";
-	    document.getElementById("main").style.marginLeft= "0";
+		UserService.logout()
 		$location.path('/login');
 	};
+
+	self.friendRequest= function(username)
+	{
+		console.log("Entering Send Friend Request");
+		UserService.friendRequest(username)
+		.then 
+		(
+			function(response)
+			{
+				console.log(response.status);
+				alert('FriendRequest is Sent');
+				listUser();
+				$location.path("/viewUsers");
+			}, function(errResponse)
+			{
+				console.error("Error sending Friend Request");
+				$location.path("/viewUsers");
+			}
+		)
+	};
+	
+	self.applyJob= function(job)
+	{
+		console.log("Entering Job Apply")
+		UserService.applyJob(job)
+		.then
+		(
+			function(response)
+			{
+				console.log("Job Applied")
+				alert("You applied for the Job")
+				$location.path("/viewJobs")
+			}
+		)
+	};
+	$scope.getProfile = function(username)
+	{
+		console.log("Entering View Friend")
+		UserService.getProfile(username)
+		.then
+		(
+			function(response)
+			{
+				console.log("Friend Retrieved")
+				$location.path("/viewProfile")	
+			}
+		)
+	};
+	
+	getAppliedJobs = function()
+	{
+		console.log("Getting Applied Jobs")
+		UserService.getAppliedJobs()
+		.then
+		(
+			function(response)
+			{
+				console.log("Applied Jobs Recieved")
+				$scope.myJobs = response.data;
+			}
+		)
+	}
+	getAppliedJobs();
 
 });
 

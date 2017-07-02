@@ -4,16 +4,25 @@ import java.util.List;
 
 import com.niit.discussionB.model.Blog;
 
-public interface BlogDao
+
+
+public interface BlogDAO 
 {
-	public boolean save(Blog blog);
+	public boolean addBlog(Blog blog);
 	
-	public boolean update(Blog blog);
+	// to approve A blog by ADMIN only.
+	public boolean approveBlog(Blog blog);
 	
-	public boolean delete(String id);
+	public boolean updateBlog(Blog blog);	
 	
-	public List<Blog> list();
+	public boolean deleteBlog(Blog blog);
 	
-	public Blog get(String id);
+	public Blog getBlog(String title);
+	
+	public List<Blog> getBlogByUser(String username);
+	
+	public List<Blog> getApprovedBlogs();
+	
+	public List<Blog> getAllBlogs();
 
 }

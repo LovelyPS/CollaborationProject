@@ -38,13 +38,15 @@ public class UserDaoImpl implements UserDao
 		return user;
 	}
 
-	public void save(User u)
+	@Transactional
+	public boolean save(User u)
 	{
 		Session s=sessionFactory.openSession();
-		s.beginTransaction();
+		
 		s.save(u);
-		s.getTransaction().commit();
+		
 		s.close();
+		return true;
 		
 
 	}
