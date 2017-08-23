@@ -65,6 +65,31 @@ public class UserController
 			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 	}
 	
+	@RequestMapping("/viewUsers")
+	public ResponseEntity<List<User>> viewUsers() throws NullPointerException
+	{
+		String name=(String)session.getAttribute("username");
+		 System.out.println("-------------"+name+"---------------------");
+		
+			List<User> list = userDao.listUsers(name);
+			System.out.println(list);
+			if (list.isEmpty()) 
+			{
+				user.setErrorCode("100");
+				user.setErrorMessage("Users are not available");
+			}
+			else
+			{
+				
+				for(User user : list)
+				{
+					user.setErrorCode("200");
+					user.setErrorMessage("Success");
+				}
+			}
+			return new ResponseEntity<List<User>>(list, HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value="/user", method=RequestMethod.POST) 
 	public ResponseEntity<User> addUser(@RequestBody User user)
@@ -75,7 +100,8 @@ public class UserController
 		
 		
 	   
-	    boolean value = userDao.save(user);
+	   userDao.save(user);
+	    /*System.out.println("Registration Completed : "+value);
 		if (value == true) 
 		{
 			user.setErrorCode("200");
@@ -85,7 +111,7 @@ public class UserController
 		{
 			user.setErrorCode("100");
 			user.setErrorMessage("Add User Failed");
-		}
+		}*/
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 		
 	}
@@ -180,7 +206,7 @@ public class UserController
 			Date_Time dt = new Date_Time();
 			user.setLast_seen(dt.getDateTime());
 			userDao.update(user);
-			/*friendDAO.setUsersOffline(session.getAttribute("username").toString());*/
+			friendDAO.setUsersOffline(session.getAttribute("username").toString());
 			user = new User();
 			user.setErrorCode("200");
 			user.setErrorMessage("You have logged out.");

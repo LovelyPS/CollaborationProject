@@ -1,7 +1,7 @@
 myApp.factory('AdminService', function($http, $q, $rootScope)
 {
 	console.log("Admin Service")
-	var BASE_URL = "http://localhost:9007/discussionB/"
+	var BASE_URL = "http://localhost:9080/discussionB/"
 	return {
 
 		listAllForums: function()

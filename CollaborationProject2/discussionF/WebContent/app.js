@@ -28,6 +28,7 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 			.when('/myProfile',
 			{
 				templateUrl : 'c_user/myProfile.html',
+				controller : 'FriendController'
 			})
 			.when('/upload',
 			{
@@ -47,6 +48,16 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 			{
 				templateUrl : 'c_admin/manageJobs.html',
 				controller : 'AdminController'
+			})
+			.when('/manageEvents',
+			{
+				templateUrl : 'c_admin/manageEvents.html',	
+				controller : 'AdminController'
+			})
+			.when('/addEvents',
+			{
+				templateUrl : 'c_admin/manageEvents.html',	
+//				controller : 'AdminController'
 			})
 			.when('/viewUsers',
 	{
@@ -73,7 +84,7 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 		.when('/viewJobs',
 	{
 		templateUrl : 'c_job/jobs.html',
-		controller : 'JobController'	
+		controller : 'JobController'
 	})
 		.when('/viewForums',
 	{
@@ -98,6 +109,22 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 			{
 				templateUrl : 'c_forum/forums.html',
 				controller : 'ForumController'	
+			})
+			.when('/cmred',
+			{
+				templateUrl : 'c_blog/comment-redirect.html',
+			})
+			.when('/fmred',
+			{
+				templateUrl : 'c_forum/forum-redirect.html',
+			})			
+			.when('/jred',
+			{
+				templateUrl : 'c_admin/jred.html',
+			})
+			.when('/ered',
+			{
+				templateUrl : 'c_admin/ered.html',
 			})
 			
         .otherwise({
@@ -165,6 +192,7 @@ myApp.controller("UserController", function(UserService,$scope,$location,$rootSc
 	
     self.newUser = {};
     self.message = "";
+  
     
 	
     self.register = function(){
@@ -296,20 +324,7 @@ myApp.controller("UserController", function(UserService,$scope,$location,$rootSc
 		)
 	};
 	
-	getAppliedJobs = function()
-	{
-		console.log("Getting Applied Jobs")
-		UserService.getAppliedJobs()
-		.then
-		(
-			function(response)
-			{
-				console.log("Applied Jobs Recieved")
-				$scope.myJobs = response.data;
-			}
-		)
-	}
-	getAppliedJobs();
+	
 
 });
 

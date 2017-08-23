@@ -1,7 +1,7 @@
 myApp.factory('BlogService', function($http, $q, $rootScope)
 {
 	console.log("Entering BlogService")
-	var BASE_URL = "http://localhost:9007/discussionB/"
+	var BASE_URL = "http://localhost:9080/discussionB/"
 		return{
 		
 	listBlog: function()
@@ -75,7 +75,20 @@ myApp.factory('BlogService', function($http, $q, $rootScope)
 			console.log("Added Blog")
 			return response;
 		});
-	}
+	},
+	/*blogLike: function(blog_title)
+	{
+		console.log("Like Blog")
+		return $http.post(BASE_URL + "blogLike-"+blog_title)
+		
+		.then(
+		function(response)
+		{
+			console.log(response.status)
+			console.log("Like HIT SUCESS")
+			return response;
+		});
+	}*/
 	
 	}
 })

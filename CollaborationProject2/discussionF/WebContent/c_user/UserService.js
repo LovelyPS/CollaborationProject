@@ -7,7 +7,7 @@ angular.module("myApp")
 	
 	
 	console.log("Entering UserService")
-	var BASE_URL = "http://localhost:9007/discussionB/"
+	var BASE_URL = "http://localhost:9080/discussionB/"
 		return{
 		
 		register: function(user)
@@ -73,6 +73,18 @@ angular.module("myApp")
 		{
 			console.log("Entering Function List User")
 			return $http.get(BASE_URL + "getUserList")
+			.then(function(response)
+				{
+//					console.log(response.data)
+					console.log("Recieved List Users "+response.status)
+					return response.data
+		
+				})
+		},
+		listUsers: function()
+		{
+			console.log("Entering Function List User")
+			return $http.get(BASE_URL + "viewUsers")
 			.then(function(response)
 				{
 //					console.log(response.data)

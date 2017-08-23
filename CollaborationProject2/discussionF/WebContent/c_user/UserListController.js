@@ -1,4 +1,4 @@
-myApp.controller('UserListController', function($scope, $location, UserService, $rootScope, $cookieStore, $http)
+   myApp.controller('UserListController', function($scope, $location, UserService,FriendService, $rootScope, $cookieStore, $http)
 {
 		console.log("Entering User Controller")
 		var self = this;
@@ -8,7 +8,7 @@ myApp.controller('UserListController', function($scope, $location, UserService, 
 		listUser=function()
 		{
 			console.log("Entering List Users Method")
-			UserService.listUser()
+			UserService.listUsers()
 			.then
 			(
 				function(response)

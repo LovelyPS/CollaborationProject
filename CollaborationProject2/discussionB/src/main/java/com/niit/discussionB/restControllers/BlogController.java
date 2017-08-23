@@ -174,7 +174,10 @@ public class BlogController
 		Date_Time dt = new Date_Time();
 		String date = dt.getDateTime();
 		blog.setDate_time(date);
+		System.out.println("Blog Data :"+blog+"_______________________________");
 		boolean value = blogDAO.addBlog(blog);
+		System.out.println("Blog Data :"+blog+"_______________________________");
+		System.out.println("Blog Data :"+blog+"_______________________________");
 		
 		if(value == true)
 		{
@@ -215,4 +218,26 @@ public class BlogController
 		}
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
 	}
+	/*@PostMapping("/blogLike-{title}")
+	public ResponseEntity<Blog> blogLike(@PathVariable ("title") String title)
+	{
+		log.info("Blog Recieved");
+		
+		blog = blogDAO.getBlog(title);
+		blog.setLikes(blog.getLikes()+1);
+		boolean value = blogDAO.updateBlog(blog);
+		if(value == true)
+		{
+			log.info("Blog updated successfully");
+			blog.setErrorCode("100");
+			blog.setErrorMessage("Blog has been updated");
+		}
+		else
+		{
+			log.info("Blog has not been updated");
+			blog.setErrorCode("404");
+			blog.setErrorMessage("Updating Blog Unsuccessful");
+		}
+		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
+	}*/
 }

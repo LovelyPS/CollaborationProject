@@ -222,6 +222,7 @@ public class FriendController
 	@GetMapping("/viewPendingRequest")
 	public ResponseEntity<List<Friend>> getPendingRequest()
 	{
+		System.out.println("*************8/n/nIN PENDING REQUESTs.../n*************");
 		List<Friend> list = new ArrayList<Friend>();
 		if(session.getAttribute("username")==null)
 		{
@@ -235,6 +236,7 @@ public class FriendController
 		{
 			log.info("Getting Pending Request for "+session.getAttribute("username").toString());
 			String userID = session.getAttribute("username").toString();
+			System.out.println("******/n/nIN PENDING REQUESTs..ID==="+userID+"./n*************");
 			list = friendDAO.showPendingRequests(userID);
 			log.info("Pending Requests recieved");
 			if(list.isEmpty() || list==null)

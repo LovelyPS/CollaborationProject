@@ -1,5 +1,6 @@
 myApp.controller('FriendController', function($scope, $location, FriendService)
 	{
+	    
 		$scope.friends= [];
 		$scope.pendingRequest= [];
 		$scope.sentRequest= [];

@@ -16,7 +16,7 @@ body {
     z-index: 1;
     top: 100;
     left: 0;
-    background-color: #111;
+    background-color: #1086B9;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 0px;
@@ -26,13 +26,13 @@ body {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: white;
     display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
+    color: #818181;
 }
 
 .sidenav .closebtn {
@@ -54,11 +54,11 @@ body {
 }
 </style>
 </head>
-<body style="background-image: url('resources/images/bg1.jpg');" >
+<body style="background-image: url('resources/images/bg2.jpg');" >
 
 <div data-ng-app="myApp">
 <div data-ng-controller="UserController as ctrl">
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" style="background-color: #1086B9  ">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -66,7 +66,7 @@ body {
       			<li data-ng-if="currentUser.username">
 				<a style="font-size:30px;cursor:pointer;"  onClick="openNav()">&#9776; open </a></li>
       			<li><a href="#/"><img alt="GS" src="resources/images/logo.png" height="50" width="60"></a></li>
-      			<li><font style="font-size: 35px"><a class="navbar-brand" style="color: red;" href="#/">
+      			<li><font style="font-size: 35xp"><a class="navbar-brand" style="color: #2103B6  ;" href="#/">
       			<strong>Discussion</strong></a></font></li>
    	  </ul>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -113,6 +113,7 @@ body {
   <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageBlogs">MANAGE BLOGS</a>
   <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageForums">MANAGE FORUMS</a>
   <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageJobs">MANAGE JOBS</a>
+  <a data-ng-if="currentUser.role=='ADMIN'" href="#/manageEvents">MANAGE EVENTS</a>
   <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewBlogs">BLOGS</a>
   <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewForums">FORUMS</a>
   <a data-ng-if="currentUser.role!='ADMIN'" href="#/viewJobs">JOB HUNT</a>
@@ -162,6 +163,29 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
+}
+
+</script>
+<script type="text/javascript">
+function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
 </script>
 

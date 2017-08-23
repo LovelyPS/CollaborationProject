@@ -192,6 +192,7 @@ public class ForumController
 	@GetMapping("/viewAllForums")
 	public ResponseEntity<List<Forum>> getAllForums()
 	{
+		System.out.println("__________________In Get All Forums____________");
 		List<Forum> list = forumDAO.getForumList();
 		if(list.isEmpty() || list == null)
 		{

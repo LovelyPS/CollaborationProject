@@ -65,20 +65,19 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 		$location.path("/viewBlog")
 	}
 	
-	this.addComment = addComment
-	function addComment(blog_title)
+	/*this.blogLike = blogLike
+	function blogLike(blog_title)
 	{
 		console.log(blog_title)
-		console.log($scope.blogComment.rating)
-		$scope.blogComment.blog_id = blog_title;
-		BlogService.addComments(blog_title, $scope.blogComment)
+		
+		BlogService.blogLike(blog_title)
 		.then
 		(
 			function(response)
 			{
-				console.log("Add Blog Comment "+response.status)
+				console.log("Blog Like Hit "+response.status)
 			}
-		);
+		)
 		BlogService.getBlog(blog_title)
 		.then
 		(
@@ -100,6 +99,45 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 					$scope.blogComments = response;
 				}
 		);
+		console.log("Get comments for Redirect to next "+blog_title)
+		$location.path("/cmred")
+	}*/
+	this.addComment = addComment
+	function addComment(blog_title)
+	{
+		console.log(blog_title)
+		console.log($scope.blogComment.rating)
+		$scope.blogComment.blog_id = blog_title;
+		BlogService.addComments(blog_title, $scope.blogComment)
+		.then
+		(
+			function(response)
+			{
+				console.log("Add Blog Comment "+response.status)
+			}
+		)
+		BlogService.getBlog(blog_title)
+		.then
+		(
+				function(response)
+				{
+					console.log("Get Blog Success "+response.status)
+					console.log(response)
+					$scope.blog=response;
+				}
+		)
+		BlogService.getComments(blog_title)
+		.then
+		(
+				function(response)
+				{
+					console.log("Get comments for "+blog_title)
+					console.log(response.data)
+					console.log(response)
+					$scope.blogComments = response;
+				}
+		);
+		console.log("Get comments for Redirect to next "+blog_title)
 		$location.path("/cmred")
 	}
 })

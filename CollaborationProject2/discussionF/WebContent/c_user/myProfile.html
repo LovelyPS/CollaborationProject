@@ -1,21 +1,64 @@
-<div class="container" data-ng-controller='UserController as ctrl'>
-		<div class="row">
-			<div class="col-sm-4">
-				<h2 style="text-align: center;">{{currentUser.f_name}} {{currentUser.l_name}}</h2>
+<style type="text/css">
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+   /*  border: 1px solid #ccc; */
+    background-color:#81D6DE;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #1086B9;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #1086B9;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+</style>
+
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+		
+		
+		
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">My Profile</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">My Friends</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Friend Requests</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo1')">Send Requests</button>
+  
+</div>
+
+<div id="London" class="tabcontent">
+  <h2 style="text-align: center;">{{currentUser.first_name}} {{currentUser.last_name}}</h2>
 				<p style="text-align: center;"><img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" height="250" width="250"></p>
 				<!-- <p style="text-align: center;"><a class="btn btn-default" href="#/upload">Upload New Profile Photo?</a></p> -->
-			<form method="POST" enctype="multipart/form-data" action="http://localhost:9007/discussionB/Upload">
+			<form method="POST" enctype="multipart/form-data" action="http://localhost:9080/discussionB/Upload">
                     <!-- <input type="text" name="fileName"> -->
                     <input type="file" name="uploadedFile">
                     <input type="submit" value="Upload New Profile Photo? ">
              </form>
-			</div>
-			<div class="col-sm-12">
-			
-								
-				 <div class="tab-content">
-				    <div id="myProfile" class="tab-pane fade in active">
-				    <table class="table table-striped">
+             <div class="row" data-ng-controller='FriendController as ctrl'>
+				    <table class="table">
 			    		
 			    		<tr>
 							<th> UserName: </th>
@@ -66,57 +109,63 @@
 							<td> </td>
 			    		</tr>
 			    		
-			    		<!-- <tr>
+			    		<tr>
 							<th> Last Seen at: </th>
 							<td> {{currentUser.last_seen}}</td>
-			    		</tr> -->
+			    		</tr>
 			    	</table>
-				    </div>
-				    
-			        <div id="myFriends" class="tab-pane fade">
-						<h3>Friends List</h3>
-						<div data-ng-if="friends">
-						<div class="row" data-ng-repeat="f in friends">
-							<div class="col-sm-2">
-								<p style="text-align: center;"><img data-ng-if="f.friendID==currentUser.username" data-ng-src="resources/images/{{f.userID}}" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
-								<p style="text-align: center;"><img data-ng-if="f.userID==currentUser.username" data-ng-src="resources/images/{{f.friendID}}" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
-							</div>
-							<div class="col-sm-8">
-								<table class="table">
-									<tr>
-											<td data-ng-if="f.friendID==currentUser.username"><strong>UserName:</strong><a href="" data-ng-click="getProfile(f.userID)" > {{f.userID}}</a></td>
-											<td data-ng-if="f.userID==currentUser.username"><strong>UserName:</strong><a href="" data-ng-click="getProfile(f.friendID)" > {{f.friendID}}</a></td>
-											
-									</tr>
-									<tr>
-											<td data-ng-if="f.friendID==currentUser.username"><strong>Name:</strong> {{f.userFName}} {{f.userLName}}</td>
-											<td data-ng-if="f.userID==currentUser.username"><strong>Name:</strong> {{f.friendFName}} {{f.friendLName}}</td>
-									</tr>
-									<tr>
-											<td data-ng-if="f.friendID==currentUser.username"><strong>Online:</strong> {{f.userIsOnline}}</td>
-											<td data-ng-if="f.userID==currentUser.username"><strong>Online:</strong> {{f.friendisOnline}}</td>
-									</tr>
-									
-								</table>
-							</div>
-							<div class="col-sm-2">
-								<a class="btn btn-danger" data-ng-if="f.friendID==currentUser.username" href="" data-ng-click="removeFriend(f.userID)">Remove Friend</a>
-								<a class="btn btn-danger" data-ng-if="f.userID==currentUser.username" href="" data-ng-click="removeFriend(f.friendID)">Remove Friend</a>
-							</div>
-						</div>
+			    	</div>
+		
+</div>
+
+<div id="Paris" class="tabcontent">
+
+  <div class="row">
+  <div data-ng-if="friends">
+
+    <div class="shadow">
+     
+     <div data-ng-if="friends">
 						
-						</div>
+	<div data-ng-repeat="f in friends">
+      <div class="col-sm-12">
+        <div class="col-sm-2">
+          <!-- <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px"> -->
+          <img data-ng-if="f.friendID==currentUser.username" data-ng-src="resources/images/{{f.userID}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" width="60px">
+		  <img data-ng-if="f.userID==currentUser.username" data-ng-src="resources/images/{{f.friendID}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" width="60px">
+        </div>
+        <div class="col-sm-8">
+          <h4 data-ng-if="f.friendID==currentUser.username"><a href="" data-ng-click="getProfile(f.userID)" > {{f.userID}}</a></h4>
+          <h4 data-ng-if="f.userID==currentUser.username"><a href="#">Rahul Jain</a></h4>
+        </div>
+        <div class="col-sm-2">
+          <a class="btn btn-danger" data-ng-if="f.friendID==currentUser.username" href="" data-ng-click="removeFriend(f.userID)">Remove Friend</a>
+		  <a class="btn btn-danger" data-ng-if="f.userID==currentUser.username" href="" data-ng-click="removeFriend(f.friendID)">Remove Friend</a>
+					<br>
+					<h4 data-ng-if="f.friendID==currentUser.username"><strong>Online:</strong> {{f.userIsOnline}}</h4>
+					 <h4 data-ng-if="f.userID==currentUser.username"><strong>Online:</strong> {{f.friendisOnline}}</h4>		
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <hr />
+      </div>
+      </div>
+      
+    </div>
+  </div>
+  
+						
 						<div data-ng-if="!friends">
 							You have no friends.
 						</div>
-					</div>
+</div>
 
-			        <div id="pendingRequests" class="tab-pane fade">
-						<h3>Pending Requests</h3>
+<div id="Tokyo" class="tabcontent">
+  <h3>Pending Requests</h3>
 						<div data-ng-if="pendingRequest">
 							<div class="row" data-ng-repeat="p in pendingRequest">
 								<div class="col-sm-2">
-									<p style="text-align: center;"><img data-ng-src="resources/images/{{p.userID}}" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
+									<p style="text-align: center;"><img data-ng-src="resources/images/{{p.userID}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
 								</div>
 								<div class="col-sm-6">
 									<table class="table">
@@ -140,14 +189,13 @@
 						<div data-ng-if="!pendingRequest">
 							You have no pending requests.
 						</div>
-					</div>
-
-			        <div id="sentRequests" class="tab-pane fade">
-						<h3>Sent Requests</h3>
+</div>
+<div id="Tokyo1" class="tabcontent">
+  <h3>Sent Requests</h3>
 						<div data-ng-if="sentRequest">
 							<div class="row" data-ng-repeat="s in sentRequest">
 								<div class="col-sm-2">	
-									<p style="text-align: center;"><img data-ng-src="resources/images/{{s.friendID}}" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
+									<p style="text-align: center;"><img data-ng-src="resources/images/{{s.friendID}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
 								</div>		
 								<div class="col-sm-8">
 									<table class="table">
@@ -167,39 +215,5 @@
 						<div data-ng-if="!sentRequest">
 							You have no sent requests.
 						</div>
-    			</div>
-				
-	        	<div id="myJobs" class="tab-pane fade">
-						<h3>Jobs Applied For</h3>
-						<div data-ng-if="myJobs">
-							<div class="row" data-ng-repeat="m in myJobs">
-								<div class="col-sm-2">	
-									<p style="text-align: center;"><img data-ng-src="resources/images/{{m.username}}" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="75" width="75"></p>
-								</div>		
-								<div class="col-sm-8">
-									<table class="table">
-										<tr>
-											<td><strong>Organization: </strong>{{m.company}}</td>
-										</tr>
-										<tr>
-											<td><strong>Position: </strong>{{m.position}}</td>
-											<td><strong>Location: </strong>{{m.location}}</td>
-										</tr>
-										<tr>
-											<td><strong>Applied on: </strong>{{m.date}}</td>
-										</tr>
-									</table>					
-								</div>
-								<div class="col-sm-2">
-								</div>
-						</div>
-					</div>
-						<div data-ng-if="!myJobs">
-							You have not applied for any jobs.
-						</div>
-    			</div>
-								
-			</div>	
-		</div>
-	</div>
+</div>
 </div>

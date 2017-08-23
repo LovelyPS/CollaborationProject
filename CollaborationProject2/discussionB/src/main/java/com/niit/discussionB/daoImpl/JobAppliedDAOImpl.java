@@ -87,6 +87,7 @@ public class JobAppliedDAOImpl implements JobAppliedDAO
 		{
 			String sql = "From JobApplied";
 			Query query = sessionFactory.getCurrentSession().createQuery(sql);
+			System.out.println(query.list());
 			log.info("List Retrieved");
 			return query.list();
 		}

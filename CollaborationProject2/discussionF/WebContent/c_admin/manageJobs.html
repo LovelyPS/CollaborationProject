@@ -1,34 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
 <style type="text/css">
-body
-{
-    background-image: url("images/admin.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%; 
-    background-attachment: fixed;
+input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
-.table
-{
-    background-image: url("images/white.jpg");
-    background-repeat: no-repeat;
-    background-size: 100%; 
-    background-attachment: fixed;
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 100%;
+}
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+   /*  border: 1px solid #ccc; */
+    background-color:#81D6DE;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #1086B9;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #1086B9;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }
 </style>
-</head>
-<body>
-	<ul class="nav nav-pills">
-		 <li role="presentation"><a class="btn btn-default btn-block" data-toggle="tab" href="#manageJobs">MANAGE JOBS</a></li>
-		 <li role="presentation"><a class="btn btn-default btn-block" data-toggle="tab" href="#addJobs">ADD NEW JOB</a></li>
-		 <li role="presentation"><a class="btn btn-default btn-block" data-toggle="tab" href="#appliedJobs">JOB APPLICATIONS</a></li>
-	</ul>
-<div class="tab-content">
-	<div id="manageJobs" class="tab-pane fade in active">
-	<h1 style="text-align: center; color: #0000b3"><font face="Vivaldi"><strong>Manage Jobs</strong></font></h1>
+
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+		
+		
+		
+  <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">MANAGE JOBS</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">ADD NEW JOB</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">JOB APPLICATIONS</button>
+  
+  
+</div>
+
+<div id="London" class="tabcontent">
+
 	<div class="container" data-ng-controller="AdminController as actrl">
 		<div class="row" data-ng-repeat="j in jobs">
 			<div class="col-sm-12">
@@ -63,9 +94,12 @@ body
 		
 		</div>
 	</div>
-	</div>
-	
-	<div id="addJobs" class="tab-pane fade">
+
+  
+</div>
+
+<div id="Paris" class="tabcontent">
+
 	<div class="row" data-ng-controller="JobController as ctrl">
 	<div class="col-sm-3"></div>
 		<div class="col-sm-6">
@@ -95,7 +129,7 @@ body
 						<tr>
 							<th>Qualification 10th</th>
 							<td><select data-ng-model='job.q_10' required="required">
-			                        <option value="NIL"></option>
+			                        <option value="NIL">NIL</option>
 			                        <option value="50.0%">50.0%</option>
 			                        <option value="55.0%">55.0%</option>
 			                        <option value="60.0%">60.0%</option>
@@ -107,7 +141,7 @@ body
 						<tr>
 							<th>Qualification PUC</th>
 							<td><select data-ng-model='job.q_12' required="required">
-			                        <option value="NIL"></option>
+			                        <option value="NIL">NIL</option>
 			                        <option value="50.0%">50.0%</option>
 			                        <option value="55.0%">55.0%</option>
 			                        <option value="60.0%">60.0%</option>
@@ -119,7 +153,7 @@ body
 						<tr>
 							<th>Qualification UG</th>
 							<td><select data-ng-model='job.q_ug' required="required">
-									<option value="NIL"></option>
+									<option value="NIL">NIL</option>
 			                        <option value="50.0%">50.0%</option>
 			                        <option value="55.0%">55.0%</option>
 			                        <option value="60.0%">60.0%</option>
@@ -144,12 +178,13 @@ body
 			</form>
 		</div>
 		<div class="col-sm-3"></div>
-	</div>
-	</div>
-	
-	<div id="appliedJobs" class="tab-pane fade">
-		<h2  style="text-align: center; color: #0000b3"><font face="Vivaldi"><strong>Job Applications</strong></font></h2>
-		
+		</div>
+
+  
+</div>
+
+<div id="Tokyo" class="tabcontent" data-ng-controller="AdminController as actrl">
+  
 		<div class="row">
 			<div class="col-sm-3"></div>
 			<div class="col-sm-7"></div>
@@ -177,7 +212,8 @@ body
 			</div>
 		
 		</div>
-	</div>
+
+
 </div>
-</body>
-</html>
+
+</div>

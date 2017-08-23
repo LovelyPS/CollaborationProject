@@ -43,6 +43,9 @@ public class FileUploadController
 	{
 		if (uploadFile != null ) 
 		{
+			if(session.getAttribute("username")!=null)
+			{
+			System.out.println(session.getAttribute("username").toString());
 			String username = session.getAttribute("username").toString();
 			MultipartFile aFile = uploadFile;
 			FileUpload fileUpload = new FileUpload();
@@ -70,6 +73,11 @@ public class FileUploadController
          		}catch(Exception e){
          		e.printStackTrace();
          	}
+		}
+		}
+		else
+		{
+			System.out.println("Session equal to null");
 		}
 		ModelAndView mv = new ModelAndView("backToHome");
 		return mv;

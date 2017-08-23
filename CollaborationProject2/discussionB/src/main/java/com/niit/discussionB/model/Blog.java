@@ -17,13 +17,11 @@ public class Blog extends BaseDomain
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int blog_id;
 	private String blog_title;
-	@Lob
 	private String description;
 	private String username;
 	private String status;
 	private String date_time;
-	@Lob
-	private String rejected;
+	private int likes;
 	
 	public int getBlog_id() {
 		return blog_id;
@@ -73,12 +71,21 @@ public class Blog extends BaseDomain
 		this.description = description;
 	}
 
-	public String getRejected() {
-		return rejected;
+	public int getLikes() {
+		return likes;
 	}
 
-	public void setRejected(String rejected) {
-		this.rejected = rejected;
+	public void setLikes(int likes) {
+		this.likes = likes;
 	}
+
+	@Override
+	public String toString() {
+		return "Blog [blog_id=" + blog_id + ", blog_title=" + blog_title + ", description=" + description
+				+ ", username=" + username + ", status=" + status + ", date_time=" + date_time + ", likes=" + likes
+				+ "]";
+	}
+
+	
 	
 }

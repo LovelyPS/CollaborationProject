@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +40,21 @@ private static final Logger log = LoggerFactory.getLogger(BlogDAOImpl.class);
 		}
 	}
 	
-	@Transactional
 	public boolean addBlog(Blog blog)
 	{
 		log.info("Add blog started");
-		try
-		{
+		System.out.println("Add blog started"+blog);
+		
 			blog.setStatus("Submitted");
-			sessionFactory.getCurrentSession().saveOrUpdate(blog);
+			Session s=sessionFactory.openSession();
+			s.beginTransaction();
+			s.save(blog);
+			s.getTransaction().commit();
+			s.close();
+			/*sessionFactory.getCurrentSession().save(blog);*/
 			log.info("Add Blog Success");
 			return true;
-		} catch(Exception ex)
-		{
-			log.error("Error adding Blog");
-			return false;
-		}
+	
 	}
 	
 	@Transactional
@@ -182,17 +183,20 @@ private static final Logger log = LoggerFactory.getLogger(BlogDAOImpl.class);
 		try
 		{
 			String hql_string = "FROM Blog";
-			@SuppressWarnings("rawtypes")
 			Query query = sessionFactory.getCurrentSession().createQuery(hql_string);
-			@SuppressWarnings("unchecked")
+			
 			List<Blog> list = query.list();
+			System.out.println("Blog is not Empty"+list);
+			
 			if (list != null && !list.isEmpty()) 
 			{
 				log.info("Blog List Retrieved");
+				System.out.println("Blog is not Empty"+list);
 				return list;
 			}
+			System.out.println("Blog is Empty");
 			log.warn("Blog List must be empty.");
-			return null;
+			return list;
 		} 
 		catch(Exception ex)
 		{

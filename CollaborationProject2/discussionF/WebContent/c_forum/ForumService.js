@@ -1,13 +1,13 @@
 myApp.factory('ForumService', function($http, $q, $location, $rootScope)
 {
 	console.log("Entering Forum Service")
-	var BASE_URL = "http://localhost:9007/discussionB/"
+	var BASE_URL = "http://localhost:9080/discussionB/"
 		return{
 		
 	listForum: function()
 	{
 		console.log("Entering Forum List")
-		return $http.get(BASE_URL + "viewApprovedForums")
+		return $http.get(BASE_URL + "viewAllForums")
 		.then(function(response) 
 		{
 			console.log(response.data)
