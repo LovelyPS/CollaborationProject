@@ -36,7 +36,7 @@ div.tab button.active {
 }
 </style>
 
-<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%">
+<div style="background-color: ;padding-left: 20%;padding-top: 2%;padding-right: 5%" >
 		
 		
 		
@@ -120,7 +120,7 @@ div.tab button.active {
 
 <div id="Paris" class="tabcontent">
 
-  <div class="row">
+  <div class="row" data-ng-controller='FriendController as ctrl'>
   <div data-ng-if="friends">
 
     <div class="shadow">
@@ -136,14 +136,23 @@ div.tab button.active {
         </div>
         <div class="col-sm-8">
           <h4 data-ng-if="f.friendID==currentUser.username"><a href="" data-ng-click="getProfile(f.userID)" > {{f.userID}}</a></h4>
-          <h4 data-ng-if="f.userID==currentUser.username"><a href="#">Rahul Jain</a></h4>
+          <h4 data-ng-if="f.userID==currentUser.username"><a href="" data-ng-click="getProfile(f.friendID)" > {{f.userID}}</h4>
         </div>
         <div class="col-sm-2">
           <a class="btn btn-danger" data-ng-if="f.friendID==currentUser.username" href="" data-ng-click="removeFriend(f.userID)">Remove Friend</a>
 		  <a class="btn btn-danger" data-ng-if="f.userID==currentUser.username" href="" data-ng-click="removeFriend(f.friendID)">Remove Friend</a>
 					<br>
-					<h4 data-ng-if="f.friendID==currentUser.username"><strong>Online:</strong> {{f.userIsOnline}}</h4>
-					 <h4 data-ng-if="f.userID==currentUser.username"><strong>Online:</strong> {{f.friendisOnline}}</h4>		
+					<h4 data-ng-if="f.friendID==currentUser.username">
+					 <img data-ng-if="f.userIsOnline=='Y'" data-ng-src="resources/images/isOnline.png" onerror="this.src='resources/images/profilepic.png'" class="img-circle" width="60px">
+					  <img data-ng-if="f.userIsOnline=='N'" data-ng-src="resources/images/isOffline.png" onerror="this.src='resources/images/profilepic.png'" class="img-circle" width="60px">
+					 </h4>
+					 <h4 data-ng-if="f.userID==currentUser.username">
+					 <img data-ng-if="f.friendisOnline=='Y'" data-ng-src="resources/images/isOnline.png" onerror="this.src='resources/images/profilepic.png'" class="img-circle" width="60px">
+					  <img data-ng-if="f.friendisOnline=='N'" data-ng-src="resources/images/isOffline.png" onerror="this.src='resources/images/profilepic.png'" class="img-circle" width="60px">
+					
+					</h4>	
+					<a href="#/Chat"  >CHAT</a></h4>
+   	
         </div>
       </div>
       <div class="clearfix"></div>
@@ -158,9 +167,11 @@ div.tab button.active {
 						<div data-ng-if="!friends">
 							You have no friends.
 						</div>
+						
+						</div>
 </div>
 
-<div id="Tokyo" class="tabcontent">
+<div id="Tokyo" class="tabcontent" data-ng-controller='FriendController as ctrl'>
   <h3>Pending Requests</h3>
 						<div data-ng-if="pendingRequest">
 							<div class="row" data-ng-repeat="p in pendingRequest">
@@ -217,3 +228,4 @@ div.tab button.active {
 						</div>
 </div>
 </div>
+

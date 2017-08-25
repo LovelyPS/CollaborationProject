@@ -58,7 +58,16 @@ public class UserDaoImpl implements UserDao
 		try
 		{
 			sessionFactory.getCurrentSession().saveOrUpdate(u);
-			
+			if(u.getStatus()=='A')
+			{
+				Mailer.send("123lovelyps@gmail.com","unniyarcha8943",u.getMail(),"Welcome to Disscussion","Welcome "+u.getF_name()+" "+u.getL_name()+"\nYour Account has been activated..."); 
+				
+			}
+			else if(u.getStatus()=='R')
+			{
+				Mailer.send("123lovelyps@gmail.com","unniyarcha8943",u.getMail(),"Welcome to Disscussion","Sorry "+u.getF_name()+" "+u.getL_name()+"\nYour Account has been deactivated..."); 
+				
+			}
 			
 			return true;
 		}

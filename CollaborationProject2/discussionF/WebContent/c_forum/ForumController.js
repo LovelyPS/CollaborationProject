@@ -91,6 +91,6 @@ myApp.controller('ForumController', function($scope, $location, ForumService)
 				console.log(response.data)
 			}
 		)
-		$location.path("/fmred")
+		$location.path("/viewForums")
 	}
 })

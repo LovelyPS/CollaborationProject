@@ -218,7 +218,7 @@ public class BlogController
 		}
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
 	}
-	/*@PostMapping("/blogLike-{title}")
+	@PostMapping("/blogLike-{title}")
 	public ResponseEntity<Blog> blogLike(@PathVariable ("title") String title)
 	{
 		log.info("Blog Recieved");
@@ -239,5 +239,5 @@ public class BlogController
 			blog.setErrorMessage("Updating Blog Unsuccessful");
 		}
 		return new ResponseEntity<Blog>(blog, HttpStatus.OK);
-	}*/
+	}
 }

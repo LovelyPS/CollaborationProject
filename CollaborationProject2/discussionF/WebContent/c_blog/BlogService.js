@@ -76,7 +76,7 @@ myApp.factory('BlogService', function($http, $q, $rootScope)
 			return response;
 		});
 	},
-	/*blogLike: function(blog_title)
+	blogLike: function(blog_title)
 	{
 		console.log("Like Blog")
 		return $http.post(BASE_URL + "blogLike-"+blog_title)
@@ -88,7 +88,8 @@ myApp.factory('BlogService', function($http, $q, $rootScope)
 			console.log("Like HIT SUCESS")
 			return response;
 		});
-	}*/
+	}
+	
 	
 	}
 })

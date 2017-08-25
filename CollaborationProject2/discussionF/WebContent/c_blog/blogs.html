@@ -62,12 +62,14 @@ div.tab button.active {
 <div id="London" class="tabcontent">
 <input type="text"  style="background-color: white;" class="form-control empty" placeholder="Search Blogs" data-ng-model="search">
 	<div data-ng-repeat="b in blogs|filter:{blog_title:search}">
-		<div data-ng-if="b.status == 'Approved'">
+		<div data-ng-if="b.status == 'Approved' || b.status == 'Updated'">
 		<div class="row" >
 			
 			<div class="col-sm-12 black" style="box-shadow: 5px 5px 5px #000000;width: 100%">
-				<font style="font-size: large;"><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></font> written by <strong>{{b.username}}</strong><br>
+				<font style="font-size:xx-large;"><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></font> written by <strong>{{b.username}}</strong><br>
 				<br>
+				<font style="font-size:large;"><strong>Likes({{b.likes}})</strong><br></font>
+				
 				<p style="text-align: justify;">{{b.description}}
 			</div>
 			<div class="col-sm-2"></div>
@@ -88,7 +90,7 @@ div.tab button.active {
 			
 			<div class="col-sm-12 black" style="box-shadow: 5px 5px 5px #000000;width: 100%">
 				<font style="font-size: large;"><strong><a href="" data-ng-click="getBlog(b.blog_title)">{{b.blog_title}}</a></strong></font>
-				<div data-ng-if="b.status != 'Approved'" class="container-fluid">
+				<div data-ng-if="b.status == 'Rejected'" class="container-fluid">
 						<marquee behavior="slide" direction="left" scrollamount="7" ><h4 style="color: red;">Admin not Approved yet</h4></marquee>
 						
 	     </div>

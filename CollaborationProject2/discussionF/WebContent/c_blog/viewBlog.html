@@ -1,41 +1,28 @@
-
-<div class="container">
-
-<div class="row" style="width: 900px;">
-<!-- <div class="col-sm-1"></div> -->
-<div class="col-sm-12">
-<div>
-	<div class="MyStyle"><h1 style="text-align: center;"><strong>{{gBlog.blog_title}}</strong></h1></div>
+<div style="padding-left: 300px;padding-right: 100px" data-ng-controller="BlogController as ctrl" >
+	<h2 style="text-align: left;"><strong>{{gBlog.blog_title}}</strong></h2>
 	<h4>written by <strong>{{gBlog.username}}</strong></h4>
 	<h4>posted: <strong>{{gBlog.date_time}}</strong></h4>
 	<br>
 	<p style="text-align: justify; font: bold;">{{gBlog.description}}</p>
-</div>
+
 
 <h3 style="font: italic; text-align: center;" data-ng-show="blogComments">Comments</h3>
-<a href="#" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-thumbs-up"></span> Like
-        </a>
-<div class="row" data-ng-repeat="c in blogComments" style="width: 800px">
-<table class="table">
-<tr>
-<td><img data-ng-src="resources/images/{{c.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="45" width="45"><br/>
-
-<td style="box-shadow: 5px 5px 5px #888888;width:900px"><font style="font-size: large;color: blue;">{{c.username}}</font> on {{c.postedAt}}<br/><br/>{{c.comment}}</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="col-sm-1"></div>
-</div>
-&nbsp;<br>
+<a class="btn btn-md" href="" data-ng-click="ctrl.blogLike(gBlog.blog_title)" class="btn"><button class="btn btn-block btn-primary"><i class="fa fa-thumbs-up"></i> Like</button></a>
+<div  data-ng-repeat="c in blogComments">
+	<img  data-ng-src="resources/images/{{c.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle" height="45" width="45">
+	<div style="box-shadow: 5px 5px 5px #888888;" ><br><font style="font-size: large;">{{c.username}}</font> on {{c.postedAt}}
+	<br>{{c.comment}}<br>&nbsp;<br>
+	</div>
+	
+	</div>
 <div class="row" data-ng-controller="BlogController as ctrl">
-<form data-ng-submit="ctrl.addComment(gBlog.blog_title)">
-<table class="table">
-<tr>
-<td><img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle"  onerror="this.src='images/profilepic.png'" height="45" width="45"></td>
-<td><textarea required="required" data-ng-model="blogComment.comment" rows="3" cols="45" placeholder="Your Comment Here"></textarea><br></td>
-<td>Rating
+				<div  style="box-shadow: 5px 5px 5px #888888;" >
+				<img data-ng-src="resources/images/{{currentUser.username}}.jpg" onerror="this.src='resources/images/profilepic.png'" class="img-circle"  onerror="this.src='images/profilepic.png'" height="45" width="45">
+					<form data-ng-submit="ctrl.addComment(gBlog.blog_title)">
+					
+								<textarea required="required" data-ng-model="blogComment.comment" rows="3" cols="45" placeholder="Your Comment Here"></textarea><br>	
+							
+							<div>Rating
 								<select data-ng-model='blogComment.rating' required="required">
 			                        <option value=0 selected="selected">NIL</option>
 			                        <option value=1>1</option>
@@ -44,17 +31,14 @@
 			                        <option value=4>4</option>
 			                        <option value=5>5</option>
 			                    </select>
-</td>
-<td><input type="submit" value="Post" class="btn btn-default btn-block" style="text-align: center;">
-						</td>
-</tr>
-
-</table>
-</form>
+							
+								<input type="submit" value="Post" class="btn btn-default btn-block" style="text-align: center;">
+							
+						</div>
+					</form>
+				</div>
+	
 </div>
-<div class="col-sm-1"></div>
 </div>
 
 
-</body>
-</html>

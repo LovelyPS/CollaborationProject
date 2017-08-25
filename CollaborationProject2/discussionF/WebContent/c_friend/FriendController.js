@@ -13,6 +13,7 @@ myApp.controller('FriendController', function($scope, $location, FriendService)
 				{
 					console.log("Entering Get My Friends")
 					console.log(response.status)
+					console.log(response.data)
 					$scope.friends = response.data;
 				}, function(errResponse)
 				{
@@ -29,6 +30,7 @@ myApp.controller('FriendController', function($scope, $location, FriendService)
 					{
 						console.log("Entering Get Pending Request")
 						console.log(response.status)
+						console.log(response.data)
 						$scope.pendingRequest = response.data;
 					}, function(errResponse)
 					{
@@ -45,6 +47,7 @@ myApp.controller('FriendController', function($scope, $location, FriendService)
 					{
 						console.log("Entering Get Sent Request")
 						console.log(response.status)
+						console.log(response.data)
 						$scope.sentRequest = response.data;
 					}, function(errResponse)
 					{

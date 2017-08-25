@@ -49,6 +49,7 @@ public class FriendController
 	@GetMapping("/sendRequest-{id}")
 	public ResponseEntity<Friend> addFriend(@PathVariable("id") String friendID)
 	{
+		System.out.println("-------------Sent Request----------"+friendID);
 		if(session.getAttribute("username")==null)
 		{
 			log.info("NOT LOGGED IN");

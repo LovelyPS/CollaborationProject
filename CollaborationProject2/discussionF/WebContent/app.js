@@ -7,129 +7,180 @@ var myApp = angular.module("myApp", ['ngRoute', 'ngCookies']);
 
 myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$locationProvider) {
     $routeProvider
-       .when('/',
-    		{
-    			templateUrl : 'home.html',
-    		})
-        .when("/login", {
-            templateUrl: "c_user/login.html"
-        })
-        .when("/register", {
-            templateUrl: "c_user/register.html"
-        })
-        .when("/admin", {
-            templateUrl: "c_admin/aHome.html"
-        })
-        .when('/manageUsers',
-			{
-				templateUrl : 'c_admin/mUsers.html',	
-				
-			})
-			.when('/myProfile',
-			{
-				templateUrl : 'c_user/myProfile.html',
-				controller : 'FriendController'
-			})
-			.when('/upload',
-			{
-				templateUrl : 'c_user/fileUpload.html',
-			})
-        .when('/manageBlogs',
-			{
-				templateUrl : 'c_admin/manageBlogs.html',
-				controller : 'AdminController'
-			})
-			.when('/manageForums',
-			{
-				templateUrl : 'c_admin/manageForums.html',
-				controller : 'AdminController'
-			})
-		.when('/manageJobs',
-			{
-				templateUrl : 'c_admin/manageJobs.html',
-				controller : 'AdminController'
-			})
-			.when('/manageEvents',
-			{
-				templateUrl : 'c_admin/manageEvents.html',	
-				controller : 'AdminController'
-			})
-			.when('/addEvents',
-			{
-				templateUrl : 'c_admin/manageEvents.html',	
-//				controller : 'AdminController'
-			})
-			.when('/viewUsers',
-	{
-		templateUrl : 'c_user/userList.html',
-		controller : 'UserListController'	
-	})
-	.when('/viewProfile',
+
+	.when('/',
+{
+	templateUrl : 'home.html',
+})
+	.when('/login',
+{
+	templateUrl : 'c_user/login.html',
+	controller : 'UserController'
+})
+	.when('/logout',
+{
+	templateUrl : 'home.html',
+	controller : 'UserController'
+})
+	.when('/register',
+{
+	templateUrl : 'c_user/register.html',
+	controller : 'UserController'
+})
+	.when('/viewUsers',
+{
+	templateUrl : 'c_user/userList.html',
+	controller : 'UserListController'	
+})
+	.when('/viewBlogs',
+{
+	templateUrl : 'c_blog/blogs.html',
+	controller : 'BlogController'	
+})
+.when('/viewBlog',
+{
+	templateUrl : 'c_blog/viewBlog.html',	
+})
+.when('/addBlogs',
+{
+	templateUrl : 'c_blog/blogs.html',	
+})
+	.when('/viewJobs',
+{
+	templateUrl : 'c_job/jobs.html',
+	controller : 'JobController'	
+})
+	.when('/viewForums',
+{
+	templateUrl : 'c_forum/forums.html',
+	controller : 'ForumController'	
+})
+	.when('/addForum',
+{
+	templateUrl : 'c_forum/forums.html',
+})	
+.when('/viewForum',
+{
+	templateUrl : 'c_forum/viewForum.html',
+})
+
+	.when('/viewEvents',
 		{
-			templateUrl : 'c_friend/viewProfile.html',
+			templateUrl : 'c_event/viewEvents.html',
+			controller : 'EventController'	
+		})
+	.when('/viewForums',
+		{
+			templateUrl : 'c_forum/forums.html',
+			controller : 'ForumController'	
+		})
+	.when('/Chat',
+		{
+			templateUrl : 'c_chat/chat.html',
+			controller : 'ChatController'	
+		})
+	.when('/upload',
+		{
+			templateUrl : 'c_user/fileUpload.html',
+//			controller : 'ChatController'	
+		})
+	.when('/admin',
+		{
+			templateUrl : 'c_admin/aHome.html',	
 		})	
-		.when('/viewBlogs',
+	.when('/manageBlogs',
+		{
+			templateUrl : 'c_admin/manageBlogs.html',
+			controller : 'AdminController'
+		})
+	.when('/manageEvents',
+		{
+			templateUrl : 'c_admin/manageEvents.html',	
+			controller : 'AdminController'
+		})
+		.when('/addEvents',
+		{
+			templateUrl : 'C_admin/manageEvents.html',	
+//			controller : 'AdminController'
+		})
+	.when('/manageForums',
+		{
+			templateUrl : 'c_admin/manageForums.html',
+			controller : 'AdminController'
+		})
+	.when('/manageJobs',
+		{
+			templateUrl : 'c_admin/manageJobs.html',
+			controller : 'AdminController'
+		})
+	.when('/addJobs',
+		{
+			templateUrl : 'c_admin/manageJobs.html',	
+//			controller : 'AdminController'
+		})
+	.when('/manageUsers',
+		{
+			templateUrl : 'c_admin/mUsers.html',	
+			controller : 'AdminController'
+		})
+	.when('/myProfile',
+		{
+			templateUrl : 'c_user/myProfile.html',	
+			controller : 'FriendController'
+		})		
+	.when('/myFriends',
+		{
+			templateUrl : 'c_user/myProfile.html',	
+			controller : 'FriendController'
+		})	
+	.when('/pendingRequests',
+		{
+			templateUrl : 'c_user/myProfile.html',	
+			controller : 'FriendController'
+		})
+	.when('/sentRequests',
+		{
+			templateUrl : 'c_user/myProfile.html',	
+			controller : 'FriendController'
+		})
+	.when('/cmred',
+		{
+			templateUrl : 'c_blog/comment-redirect.html',
+		})	
+		.when('/cmred',
+		{
+			templateUrl : 'c_blog/comment-redirect.html',
+		})
+		
+		.when('/fmred',
+		{
+			templateUrl : 'c_forum/forum-redirect.html',
+		})			
+		.when('/jred',
+		{
+			templateUrl : 'c_admin/jred.html',
+		})
+		.when('/ered',
+		{
+			templateUrl : 'c_admin/ered.html',
+		})
+	.when('/appliedJobs',
 	{
-		templateUrl : 'c_blog/blogs.html',
-		controller : 'BlogController'	
+		templateUrl : 'c_admin/manageJobs.html',
+		controller : 'AdminController'
 	})
-	.when('/viewBlog',
+	.when('/myJobs',
 	{
-		templateUrl : 'c_blog/viewBlog.html',	
-	})
-	.when('/addBlogs',
+		templateUrl : 'c_user/myProfile.html',
+		controller : 'UserController'
+	})		
+	.when('/viewProfile',
 	{
-		templateUrl : 'c_blog/blogs.html',	
-	})
-		.when('/viewJobs',
-	{
-		templateUrl : 'c_job/jobs.html',
-		controller : 'JobController'
-	})
-		.when('/viewForums',
-	{
-		templateUrl : 'c_forum/forums.html',
-		controller : 'ForumController'	
-	})
-		.when('/addForum',
-	{
-		templateUrl : 'c_forum/forums.html',
-	})	
-	.when('/viewForum',
-	{
-		templateUrl : 'c_forum/viewForum.html',
-	})
-	
-		.when('/viewEvents',
-			{
-				templateUrl : 'c_event/viewEvents.html',
-				controller : 'EventController'	
-			})
-		.when('/viewForums',
-			{
-				templateUrl : 'c_forum/forums.html',
-				controller : 'ForumController'	
-			})
-			.when('/cmred',
-			{
-				templateUrl : 'c_blog/comment-redirect.html',
-			})
-			.when('/fmred',
-			{
-				templateUrl : 'c_forum/forum-redirect.html',
-			})			
-			.when('/jred',
-			{
-				templateUrl : 'c_admin/jred.html',
-			})
-			.when('/ered',
-			{
-				templateUrl : 'c_admin/ered.html',
-			})
-			
-        .otherwise({
-        redirectTo: "/"
-    });
+		templateUrl : 'c_friend/viewProfile.html',
+	})		
+
+
+	.otherwise({redirectTo: '/'});
     $locationProvider.hashPrefix('');
 }]);
 

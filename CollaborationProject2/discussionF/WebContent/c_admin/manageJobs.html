@@ -60,9 +60,9 @@ div.tab button.active {
 
 <div id="London" class="tabcontent">
 
-	<div class="container" data-ng-controller="AdminController as actrl">
+	<div data-ng-controller="AdminController as actrl">
 		<div class="row" data-ng-repeat="j in jobs">
-			<div class="col-sm-12">
+			
 				<table class="table" style="box-shadow: 5px 5px 5px #000;">
 					<tr>
 						<td colspan="3"><h3>{{j.title}}</h3></td>
@@ -90,7 +90,7 @@ div.tab button.active {
 						<td colspan="3"><p style="text-align: right"><a href="" class="btn btn-danger" data-ng-click="actrl.invalidateJob(j.job_id)">Invalidate Job</a></p>
 					</tr>
 				</table>
-			</div>
+		
 		
 		</div>
 	</div>

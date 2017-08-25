@@ -5,7 +5,7 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 	$scope.blogs = [];
 	$scope.blogComments = [];
 	$scope.blogComment={id:'', blog_id:'', comment:'', postedAt:'', rating:'', username:''};
-	$scope.blog={blog_id:'', blog_title:'', description:'', username:'', status:'', date_time:'', rejected:'', errorMsg:'', errorCode:''};
+	$scope.blog={blog_id:'', blog_title:'', description:'', username:'', status:'', date_time:'', likes:'', errorMsg:'', errorCode:''};
 	$scope.message;
 	
 	listBlog=function()
@@ -64,8 +64,7 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 		);
 		$location.path("/viewBlog")
 	}
-	
-	/*this.blogLike = blogLike
+	this.blogLike = blogLike
 	function blogLike(blog_title)
 	{
 		console.log(blog_title)
@@ -100,8 +99,9 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 				}
 		);
 		console.log("Get comments for Redirect to next "+blog_title)
-		$location.path("/cmred")
-	}*/
+		$location.path("/viewBlogs")
+	}
+	
 	this.addComment = addComment
 	function addComment(blog_title)
 	{
@@ -115,7 +115,7 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 			{
 				console.log("Add Blog Comment "+response.status)
 			}
-		)
+		);
 		BlogService.getBlog(blog_title)
 		.then
 		(
@@ -134,10 +134,9 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 					console.log("Get comments for "+blog_title)
 					console.log(response.data)
 					console.log(response)
-					$scope.blogComments = response;
+					$scope.blogComments = response.data;
 				}
 		);
-		console.log("Get comments for Redirect to next "+blog_title)
-		$location.path("/cmred")
+		$location.path("/viewBlogs")
 	}
 })
