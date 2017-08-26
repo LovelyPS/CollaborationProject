@@ -4,8 +4,10 @@ myApp.controller("ChatController", function($scope,$rootScope ,ChatService) {
     $scope.max = 140;
     
     $scope.addMessage = function() {
+    	console.log("Msg : "+$scope.message);
       ChatService.send($rootScope.currentUser.username + " : " + $scope.message);
       $scope.message = "";
+      
     };
     
     ChatService.receive().then(null, null, function(message) {

@@ -92,7 +92,32 @@ body {
 				<a style="color: white" href="" data-ng-click = "ctrl.logout()"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
 			<li data-ng-show="!currentUser.username">
 				<a style="color: white" href="#/register"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
-			
+			 <li>
+          <a style="color: white;" class="dropdown-toggle" data-toggle="dropdown" href="">Chat<span class="caret"></span></a>
+		 <ul class="dropdown-menu" data-ng-controller="FriendController">
+            <li data-ng-repeat="f in friends">
+            <table>
+            	<tr>
+            		<td width="15px">
+            			<img data-ng-if="f.friendID==currentUser.username && f.userIsOnline=='Y'" src="resources/images/isOnline.png" height="10px" width="10px">
+            			<img data-ng-if="f.userID==currentUser.username && f.friendisOnline=='Y'" src="resources/images/isOnline.png" height="10px" width="10px">
+            			
+            			<img data-ng-if="f.friendID==currentUser.username && f.userIsOnline=='N'" src="resources/images/isOffline.png" height="10px" width="10px">
+            			<img data-ng-if="f.userID==currentUser.username && f.friendisOnline=='N'" src="resources/images/isOffline.png" height="10px" width="10px">
+            		</td>
+            		
+            		<td>
+            			 <a data-ng-if="f.friendID==currentUser.username" href="#/Chat">{{f.userFName}} {{f.userLName}}</a>
+            			 <a data-ng-if="f.userID==currentUser.username" href="#/Chat">{{f.friendFName}} {{f.friendLName}}</a>
+            		</td>	
+            	</tr>
+            </table>
+           	
+            </li>
+<!--             <li role="separator" class="divider"></li> -->
+<!--             <li><a href="#">Separated link</a></li> -->
+          </ul>
+        </li>
 	</ul>
 
       <ul class="nav navbar-nav navbar-left">
@@ -131,7 +156,8 @@ body {
 	<script src="./app.js"></script>
 <script src="./resources/js/jquery.min.js"></script>
 <script src="./resources/js/bootstrap.min.js"></script>
-    
+    <script src="./resources/js/sockjs.min.js"></script>
+<script src="./resources/js/stomp.min.js"></script>
 
 <script src="./c_user/UserService.js"></script>
 <script src="./c_user/UserListController.js"></script>
@@ -149,6 +175,7 @@ body {
 <script src="./c_friend/FriendService.js"></script>
 <script src="./c_admin/AdminController.js"></script>
 <script src="./c_admin/AdminService.js"></script>
+
 
 
 <script src="./c_chat/ChatController.js"></script>
