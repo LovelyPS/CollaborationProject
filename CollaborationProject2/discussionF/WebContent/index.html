@@ -92,7 +92,7 @@ body {
 				<a style="color: white" href="" data-ng-click = "ctrl.logout()"><span class="glyphicon glyphicon-log-out"></span> LOGOUT</a></li>
 			<li data-ng-show="!currentUser.username">
 				<a style="color: white" href="#/register"><span class="glyphicon glyphicon-user"></span> SIGN UP</a></li>
-			 <li>
+			 <li data-ng-show="currentUser.username">
           <a style="color: white;" class="dropdown-toggle" data-toggle="dropdown" href="">Chat<span class="caret"></span></a>
 		 <ul class="dropdown-menu" data-ng-controller="FriendController">
             <li data-ng-repeat="f in friends">

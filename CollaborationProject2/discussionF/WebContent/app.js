@@ -11,6 +11,7 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 	.when('/',
 {
 	templateUrl : 'home.html',
+	controller : 'UserController'
 })
 	.when('/login',
 {
