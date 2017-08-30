@@ -17,6 +17,7 @@ public class Blog extends BaseDomain
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int blog_id;
 	private String blog_title;
+	@Lob
 	private String description;
 	private String username;
 	private String status;

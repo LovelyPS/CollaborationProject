@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.discussionB.dao.ForumDAO;
 import com.niit.discussionB.model.Forum;
+import com.niit.discussionB.model.JoinForum;
 
 
 @SuppressWarnings("deprecation")
@@ -189,6 +190,41 @@ public class ForumDAOImpl implements ForumDAO
 		try
 		{
 			String sql = "FROM Forum where username = '"+username+"'";
+			@SuppressWarnings("rawtypes")
+			Query query = sessionFactory.getCurrentSession().createQuery(sql);
+			log.info("Forum list has been retrieved");
+			return query.list();
+		}	catch(Exception ex)
+		{
+			log.error("Error retrieving Forum List");
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	@Transactional
+	public boolean joinForum(JoinForum forum) {
+		log.info("Entering join forum");
+		try
+		{
+			/*forum.setJoin_id(getMaxId()+1);*/
+			sessionFactory.getCurrentSession().save(forum);
+			log.info("Forum has been added "+forum.getForum_id());
+			return true;
+		} catch (Exception ex)
+		{
+			log.error("Forum has not been saved");
+			ex.printStackTrace();
+		}
+			return false;
+	}
+
+	@Transactional
+	public List<JoinForum> getJoinForumList() {
+		log.info("Starting of List Forum method");
+		try
+		{
+			String sql = "FROM JoinForum";
 			@SuppressWarnings("rawtypes")
 			Query query = sessionFactory.getCurrentSession().createQuery(sql);
 			log.info("Forum list has been retrieved");

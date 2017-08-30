@@ -1,36 +1,4 @@
-<!-- <div data-ng-controller='AdminController as ctrl'>
-<h2 style="text-align: center; color:black;"><strong>USERS</strong></font></h2>
-<div class="container2" data-ng-if="users"  data-ng-repeat="u in users">
-<br>
-	<div class="row" style=" box-shadow: 5px 5px 5px #000;">
-		<div class="col-sm-9" style="float:right; ">
-			
-		<div data-ng-if="currentUser.username != u.username">
-			
-		<table class="table table-hover table-responsive">
-				<tr>
-					<td style="color: black"><h5><strong>UserName:</strong> {{u.username}}</h5></td>
-					<td style="color: black"><h5><strong>Mail ID:</strong> {{u.mail}}</h5></td>
-					<td style="color: black"><h4><strong>Name:</strong> {{u.f_name}} {{u.l_name}}</h4></td>
-					<td style="color: black"><h5><strong>Role:</strong> {{u.role}}</h5></td>
-					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong>Status:</strong> ACCEPTED</h5></td>
-					
-					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>Status:</strong> NEW USER</h5></td>
-					
-					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong>Status:</strong> REJECTED</h5></td>
-			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
-			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
-		</tr>
-		</table>
-		</div>
-			
-		</div>
-	</div>
-</div>
-<div>
-	<h2> {{message}} </h2>
-</div>
-</div> -->
+
 
 <style type="text/css">
 input[type=text] {
@@ -103,15 +71,15 @@ div.tab button.active {
 			
 		<table class="table table-hover table-responsive">
 				<tr>
-					<td style="color: black"><h5><strong>UserName:</strong> {{u.username}}</h5></td>
-					<td style="color: black"><h5><strong>Mail ID:</strong> {{u.mail}}</h5></td>
-					<td style="color: black"><h4><strong>Name:</strong> {{u.f_name}} {{u.l_name}}</h4></td>
-					<td style="color: black"><h5><strong>Role:</strong> {{u.role}}</h5></td>
-					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong>Status:</strong> ACCEPTED</h5></td>
+					<td style="color: black"><h5><strong>{{u.username}}</strong> </h5></td>
+					<td style="color: black"><h5><strong> {{u.mail}}</strong></h5></td>
+					<td style="color: black"><h4><strong>{{u.f_name}} {{u.l_name}}</strong> </h4></td>
+					<td style="color: black"><h5><strong> {{u.role}}</strong></h5></td>
+					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong> ACCEPTED</strong></h5></td>
 					
-					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>Status:</strong> NEW USER</h5></td>
+					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>NEW USER</strong> </h5></td>
 					
-					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong>Status:</strong> REJECTED</h5></td>
+					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong> REJECTED</strong></h5></td>
 			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
 			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
 		</tr>
@@ -135,19 +103,21 @@ div.tab button.active {
 	<div class="row" style=" box-shadow: 5px 5px 5px #000;">
 		<div class="col-sm-9" style="float:right; ">
 			
-		<div data-ng-if="currentUser.username != u.username && u.status == 'P'">
+		<div data-ng-if="currentUser.username != u.username && u.status == 'N'">
 			
 		<table class="table table-hover table-responsive">
+		<tr>
+		</tr>
 				<tr>
-					<td style="color: black"><h5><strong>UserName:</strong> {{u.username}}</h5></td>
-					<td style="color: black"><h5><strong>Mail ID:</strong> {{u.mail}}</h5></td>
-					<td style="color: black"><h4><strong>Name:</strong> {{u.f_name}} {{u.l_name}}</h4></td>
-					<td style="color: black"><h5><strong>Role:</strong> {{u.role}}</h5></td>
-					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong>Status:</strong> ACCEPTED</h5></td>
+					<td style="color: black"><h5><strong>{{u.username}}</strong> </h5></td>
+					<td style="color: black"><h5><strong> {{u.mail}}</strong></h5></td>
+					<td style="color: black"><h4><strong>{{u.f_name}} {{u.l_name}}</strong> </h4></td>
+					<td style="color: black"><h5><strong> {{u.role}}</strong></h5></td>
+					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong> ACCEPTED</strong></h5></td>
 					
-					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>Status:</strong> NEW USER</h5></td>
+					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>NEW USER</strong> </h5></td>
 					
-					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong>Status:</strong> REJECTED</h5></td>
+					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong> REJECTED</strong></h5></td>
 			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
 			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
 		</tr>
@@ -175,15 +145,15 @@ div.tab button.active {
 			
 		<table class="table table-hover table-responsive">
 				<tr>
-					<td style="color: black"><h5><strong>UserName:</strong> {{u.username}}</h5></td>
-					<td style="color: black"><h5><strong>Mail ID:</strong> {{u.mail}}</h5></td>
-					<td style="color: black"><h4><strong>Name:</strong> {{u.f_name}} {{u.l_name}}</h4></td>
-					<td style="color: black"><h5><strong>Role:</strong> {{u.role}}</h5></td>
-					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong>Status:</strong> ACCEPTED</h5></td>
+					<td style="color: black"><h5><strong>{{u.username}}</strong> </h5></td>
+					<td style="color: black"><h5><strong> {{u.mail}}</strong></h5></td>
+					<td style="color: black"><h4><strong>{{u.f_name}} {{u.l_name}}</strong> </h4></td>
+					<td style="color: black"><h5><strong> {{u.role}}</strong></h5></td>
+					<td data-ng-if="u.status == 'A'" style="color: black"><h5><strong> ACCEPTED</strong></h5></td>
 					
-					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>Status:</strong> NEW USER</h5></td>
+					<td data-ng-if="u.status == 'N'" style="color: black"><h5><strong>NEW USER</strong> </h5></td>
 					
-					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong>Status:</strong> REJECTED</h5></td>
+					<td data-ng-if="u.status == 'R'" style="color: black"><h5><strong> REJECTED</strong></h5></td>
 			<td><a data-ng-if="u.status != 'A'" class="btn btn-success btn-md" href="" data-ng-click="ctrl.acceptUser(u)" class="btn">ACCEPT USER</a></td>	
 			<td><a data-ng-if="u.status != 'R'" class="btn btn-danger btn-md" href="" data-ng-click="ctrl.rejectUser(u)" class="btn">REJECT USER</a></td>
 		</tr>
@@ -199,5 +169,6 @@ div.tab button.active {
 </div>
   
 </div>
+
 
 </div>

@@ -23,6 +23,7 @@ import com.niit.discussionB.model.ForumReply;
 import com.niit.discussionB.model.Friend;
 import com.niit.discussionB.model.Job;
 import com.niit.discussionB.model.JobApplied;
+import com.niit.discussionB.model.JoinForum;
 import com.niit.discussionB.model.User;
 
 @Configuration
@@ -67,6 +68,8 @@ public class AppConfig{
 		builder.addAnnotatedClass(Friend.class);
 		builder.addAnnotatedClass(Job.class);
 		builder.addAnnotatedClass(JobApplied.class);
+		builder.addAnnotatedClass(JoinForum.class);
+		
 		return builder.buildSessionFactory();
 	}
 

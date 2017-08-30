@@ -41,6 +41,8 @@ myApp.config(["$routeProvider","$locationProvider", function ($routeProvider,$lo
 .when('/viewBlog',
 {
 	templateUrl : 'c_blog/viewBlog.html',	
+	controller : 'BlogController'	
+	
 })
 .when('/addBlogs',
 {

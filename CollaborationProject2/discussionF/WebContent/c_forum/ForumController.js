@@ -4,9 +4,25 @@ myApp.controller('ForumController', function($scope, $location, ForumService)
 	var self = this;
 	$scope.forum={id:'', forum_id:'', username:'', status:'', rejected:'', date_time:'', description:''};
 	$scope.forums = [];
+	$scope.forumjoin=[];
 	$scope.forumReply= {reply_id:'', forum_id:'', reply:'', postedAt:'', rating:'', username:''};
 	$scope.forumReplies = [];
 	$scope.message;
+	
+	$scope.acceptRequest = function(joinid)
+	{
+		ForumService.acceptRequest(joinid)
+		.then
+		(
+				function(response)
+				{
+					console.log("Entering Accepting Request "+joinid)
+					console.log(response.status)
+					alert('Join Accepted')
+					$location.path("/ViewForums")
+				}
+		)
+	}	
 	
 	listForum = function()
 	{
@@ -21,6 +37,19 @@ myApp.controller('ForumController', function($scope, $location, ForumService)
 			}
 	)}
 	listForum();
+	listJoinForum = function()
+	{
+		console.log("Entering List Forum Method")
+		ForumService.listJoinForum()
+		.then
+		(
+			function(response)
+			{
+				console.log("Forum List Retrieved "+response.status)
+				$scope.forumjoin = response.data;
+			}
+	)}
+	listJoinForum();
 	
 	self.addForum = function()
 	{
@@ -45,7 +74,7 @@ myApp.controller('ForumController', function($scope, $location, ForumService)
 		(
 			function(response)
 			{
-				console.log("Forum Recieved")
+				console.log("Forum Recieved"+response)
 				$location.path("/viewForum")
 			}
 		)
@@ -61,6 +90,29 @@ myApp.controller('ForumController', function($scope, $location, ForumService)
 		)
 	}
 	
+	self.joinForum = function(id)
+	{
+		console.log("Entering Get Forum "+id)
+		ForumService.joinForum(id)
+		.then
+		(
+			function(response)
+			{
+				console.log("Forum Joined Request")
+				$location.path("/viewForums")
+			}
+		)
+		ForumService.getForumReply(id)
+		.then
+		(
+			function(response)
+			{
+				console.log("Get Comments for "+id)
+				console.log(response.data)
+				$scope.forumReplies = response.data;
+			}
+		)
+	}
 	self.addReply = addReply
 	function addReply(id)
 	{

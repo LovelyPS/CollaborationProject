@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.discussionB.dao.ForumDAO;
 import com.niit.discussionB.model.Forum;
+import com.niit.discussionB.model.JoinForum;
 import com.niit.discussionB.util.Date_Time;
 
 
@@ -147,6 +148,40 @@ public class ForumController
 			}
 		}
 	}
+	@GetMapping("/joinForum-{id}")
+	public ResponseEntity<Forum> joinForum(@PathVariable ("id") int id)
+	{
+		System.out.println("Form Controller I back End"+id);
+		if(session.getAttribute("username")==null)
+		{
+			System.out.println("No Current Session..");
+			log.info("NOT LOGGED IN");
+			return null;
+		}
+		else
+		{
+			forum = forumDAO.getForum(id);
+			String partti=(String)session.getAttribute("username");
+			if(forum==null)
+			{
+				log.error("Forum not found");
+				return null;
+			}
+			else
+			{
+				log.info("Forum has been found");
+				JoinForum jf=new JoinForum();
+				jf.setForum_id(id);
+				jf.setForum_title(forum.getForum_id());
+				jf.setForum_desc(forum.getDescription());
+				jf.setParticipate_id(partti);
+				jf.setUsername(forum.getUsername());
+				jf.setStatus("P");
+				forumDAO.joinForum(jf);
+				return new ResponseEntity<Forum>(forum, HttpStatus.OK);
+			}
+		}
+	}
 	
 	@GetMapping("/viewMyForums")
 	public ResponseEntity<List<Forum>> getMyForums()
@@ -173,6 +208,7 @@ public class ForumController
 		}
 	}
 
+	
 	@GetMapping("/viewApprovedForums")
 	public ResponseEntity<List<Forum>> getApprovedForums()
 	{
@@ -203,6 +239,22 @@ public class ForumController
 		{
 			log.info("Forums list retrieved");
 			return new ResponseEntity<List<Forum>>(list, HttpStatus.OK);
+		}
+	}
+	@GetMapping("/viewAllJoinForums")
+	public ResponseEntity<List<JoinForum>> getAllJoinForums()
+	{
+		System.out.println("__________________In Get All Join Forums____________");
+		List<JoinForum> list = forumDAO.getJoinForumList();
+		if(list.isEmpty() || list == null)
+		{
+			log.error("No Forums Found");
+			return null;
+		}
+		else
+		{
+			log.info("Forums list retrieved");
+			return new ResponseEntity<List<JoinForum>>(list, HttpStatus.OK);
 		}
 	}
 }

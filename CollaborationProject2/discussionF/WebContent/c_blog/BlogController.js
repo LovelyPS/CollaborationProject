@@ -134,7 +134,7 @@ myApp.controller('BlogController', function($scope,$location,BlogService)
 					console.log("Get comments for "+blog_title)
 					console.log(response.data)
 					console.log(response)
-					$scope.blogComments = response.data;
+					$scope.blogComments = response;
 				}
 		);
 		$location.path("/viewBlogs")
